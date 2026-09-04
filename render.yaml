@@ -1,0 +1,10 @@
+# Render Blueprint — Static Site
+# Docs: https://render.com/docs/static-sites
+services:
+  - type: web
+    name: almulla-exchange
+    runtime: static
+    branch: main
+    buildCommand: ""
+    staticPublishPath: .
+    autoDeployTrigger: commit

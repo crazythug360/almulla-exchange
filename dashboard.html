@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var t = localStorage.getItem("ame-theme");
+      if (t === "primary") t = "green";
+      if (t !== "green" && t !== "dark") t = "current";
+      document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {
+      document.documentElement.setAttribute("data-theme", "current");
+    }
+    try {
+      var f = localStorage.getItem("ame-font");
+      if (f === "inter-plex") f = "inter";
+      var fonts = { outfit: 1, jakarta: 1, "dm-sans": 1, manrope: 1, inter: 1, source: 1 };
+      if (!fonts[f]) f = "outfit";
+      document.documentElement.setAttribute("data-font", f);
+    } catch (e) {
+      document.documentElement.setAttribute("data-font", "outfit");
+    }
+    try {
+      var s = localStorage.getItem("ame-font-size");
+      if (s === "big") s = "large";
+      if (s !== "small" && s !== "medium") s = "large";
+      document.documentElement.setAttribute("data-size", s);
+    } catch (e) {
+      document.documentElement.setAttribute("data-size", "large");
+    }
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&family=Outfit:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=fit40" />
+  <link rel="stylesheet" href="dashboard.css?v=fit6" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard">
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="logo-Almullexchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+  <div class="theme-dock" id="themeDock">
+    <div class="theme-picker" id="themePicker">
+      <button class="theme-dock__btn" id="themeBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeMenu" data-i18n-aria="theme" aria-label="Theme">
+        <svg class="theme-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3.6c-4.6 0-8.4 3.6-8.4 8.4 0 3.3 2.8 4.8 4.4 4.8h1.6c.9 0 1.6.7 1.6 1.6 0 1.8 1.5 3.2 3.2 3.2 4.2 0 7.6-4 7.6-9.6C22 7.2 17.6 3.6 12 3.6Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <circle cx="7.8" cy="10.2" r="1.15" fill="currentColor"/>
+          <circle cx="10.6" cy="7.4" r="1.15" fill="currentColor"/>
+          <circle cx="14.4" cy="7.4" r="1.15" fill="currentColor"/>
+          <circle cx="17" cy="10.2" r="1.15" fill="currentColor"/>
+        </svg>
+        <span data-i18n="theme">Theme</span>
+      </button>
+      <ul class="theme-picker__menu" id="themeMenu" role="listbox" hidden>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-theme="current">
+            <span class="theme-picker__swatch theme-picker__swatch--current" aria-hidden="true"></span>
+            <span data-i18n="themeCurrent">Current</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-theme="green">
+            <span class="theme-picker__swatch theme-picker__swatch--green" aria-hidden="true"></span>
+            <span data-i18n="themePrimary">Primary (#00AE42)</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-theme="dark">
+            <span class="theme-picker__swatch theme-picker__swatch--dark" aria-hidden="true"></span>
+            <span data-i18n="themeDark">Dark</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="theme-picker" id="fontPicker">
+      <button class="theme-dock__btn" id="fontBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="fontMenu" data-i18n-aria="themeFont" aria-label="Font">
+        <svg class="theme-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4.2 18.4 9.4 5.6h1.9l5.2 12.8h-2.2l-1.1-2.8H7.5l-1.1 2.8H4.2Zm4-4.8h4.6L10.4 8.2 8.2 13.6ZM15.6 18.4V8.2c1.2-.15 2.5-.5 3.6-1.3v11.5h-3.6Z" fill="currentColor"/>
+        </svg>
+        <span data-i18n="themeFont">Font</span>
+      </button>
+      <ul class="theme-picker__menu" id="fontMenu" role="listbox" hidden>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="outfit">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontOutfit">Outfit</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="jakarta">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontJakarta">Plus Jakarta Sans</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="dm-sans">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontDmSans">DM Sans</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="manrope">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontManrope">Manrope</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="inter">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontInter">Inter</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-font="source">
+            <span class="font-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="fontSource">Source Sans Pro</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="theme-picker" id="sizePicker">
+      <button class="theme-dock__btn" id="sizeBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="sizeMenu" data-i18n-aria="themeSize" aria-label="Size">
+        <svg class="theme-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3.2 18.4 6.6 9.6h1.6l3.4 8.8H9.6l-.7-2H5.5l-.7 2H3.2Zm3-3.8h2.4L7.4 11.4 6.2 14.6ZM12.4 18.4 17.4 5.6h2l5 12.8h-2.3l-1.1-2.9h-5.2l-1.1 2.9h-2.3Zm3.8-4.9h3.8L17.4 8.2 16.2 13.5Z" fill="currentColor"/>
+        </svg>
+        <span data-i18n="themeSize">Size</span>
+      </button>
+      <ul class="theme-picker__menu" id="sizeMenu" role="listbox" hidden>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-size="small">
+            <span class="size-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="sizeSmall">Small</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-size="medium">
+            <span class="size-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="sizeMedium">Medium</span>
+          </button>
+        </li>
+        <li>
+          <button class="theme-picker__option" type="button" role="option" data-set-size="large">
+            <span class="size-picker__mark" aria-hidden="true">Aa</span>
+            <span data-i18n="sizeLarge">Large</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <header class="topnav">
+    <div class="page-lead">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false">
+        <span class="menu-btn__bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <p class="welcome">
+          <span class="welcome__copy">
+            <span class="welcome__hello">
+              <span data-i18n="welcome">Hello</span>
+              <span class="welcome__name" data-user-first hidden></span>
+              <a class="welcome__prestige-link" href="prestige.html">
+                <img class="welcome__prestige" src="images/prestige.svg" alt="Prestige member" data-i18n-alt="prestigeMember" />
+              </a>
+            </span>
+            <small data-i18n="welcomeSub">Good morning</small>
+          </span>
+      </p>
+    </div>
+    <div class="brand">
+      <img class="brand__logo" src="logo-Almullexchange.svg" alt="Al Mulla Exchange" />
+    </div>
+    <div class="page-actions">
+      <button class="pill" id="branchesBtn" type="button">
+        <svg class="pill__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 3.8a6.2 6.2 0 0 0-6.2 6.2c0 4.6 6.2 10.2 6.2 10.2s6.2-5.6 6.2-10.2A6.2 6.2 0 0 0 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <circle cx="12" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        </svg>
+        <span data-i18n="branches">Branches</span>
+      </button>
+      <button class="pill" id="langBtn" type="button">
+        <svg class="pill__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M4 12h16M12 3.8c2.4 2.4 3.6 5.2 3.6 8.2s-1.2 5.8-3.6 8.2c-2.4-2.4-3.6-5.2-3.6-8.2S9.6 6.2 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7"/>
+        </svg>
+        <span id="langBtnLabel">العربية</span>
+      </button>
+    </div>
+  </header>
+  <div class="app" id="app">
+    <main class="content content--home">
+        <section class="home-hero" aria-roledescription="carousel" aria-label="Promotions">
+          <div class="home-hero__track">
+            <img class="home-hero__slide is-active" src="images/banner-main.png?v=350" alt="" />
+            <img class="home-hero__slide" src="images/banner2.png?v=350" alt="" />
+            <img class="home-hero__slide" src="images/banner3.png?v=350" alt="" />
+          </div>
+          <h2 class="home-hero__title" data-i18n="sendHomeTitle">Send money home in minutes</h2>
+          <a class="home-hero__cta" href="send.html" data-i18n="sendMoney">Send Money</a>
+          <div class="home-hero__dots" role="tablist" aria-label="Banner slides">
+            <button class="home-hero__dot is-active" type="button" role="tab" aria-label="Slide 1" aria-selected="true" data-hero-slide="0"></button>
+            <button class="home-hero__dot" type="button" role="tab" aria-label="Slide 2" aria-selected="false" data-hero-slide="1"></button>
+            <button class="home-hero__dot" type="button" role="tab" aria-label="Slide 3" aria-selected="false" data-hero-slide="2"></button>
+          </div>
+        </section>
+
+        <section class="home-search bene-search-section">
+          <p class="home-kicker" data-i18n="whoSending">Who are you sending to?</p>
+          <div class="bene-search-wrap">
+            <label class="bene-search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="bene-search-slot">
+                <input type="search" id="beneSearch" data-i18n-aria="searchBeneAria" aria-label="Search by beneficiary name, account number, or mobile number" placeholder="" autocomplete="off" />
+                <span class="bene-search-hint" id="beneSearchHint" aria-hidden="true">
+                  <span class="bene-search-hint__text"></span>
+                  <span class="bene-search-hint__caret"></span>
+                </span>
+              </span>
+            </label>
+            <ul class="bene-suggest" id="beneSuggest" hidden></ul>
+          </div>
+
+          <article class="bene-remit-card is-hidden" id="beneRemitCard">
+            <div class="bene-remit-head">
+              <div>
+                <h4 id="remitName"></h4>
+                <p class="bene-acc" id="remitAcc"></p>
+                <p class="bene-bank" id="remitBank"></p>
+              </div>
+              <button type="button" class="remit-close" id="remitClose" aria-label="Close">×</button>
+            </div>
+            <div class="bene-amount-row">
+              <div class="amount-field">
+                <span data-i18n="enterAmount">Enter Amount</span>
+                <input class="amount-input" id="remitAmount" type="number" min="0" step="1" value="25" />
+                <span class="ccy-toggle" id="remitCcyToggle">
+                  <button type="button" class="is-active" data-ccy="KWD">KWD</button>
+                  <span>|</span>
+                  <button type="button" data-ccy="RECV">BDT</button>
+                </span>
+              </div>
+              <button type="button" class="proceed-btn" id="remitProceed">
+                <span data-i18n="sendBtn">Send</span>
+              </button>
+            </div>
+            <p class="bene-rate" id="remitRateLine"></p>
+            <p class="bene-total" id="remitTotalLine"></p>
+            <p class="remit-success is-hidden" id="remitSuccess"></p>
+          </article>
+        </section>
+
+        <section class="home-actions">
+          <div class="home-section-head">
+            <h3 data-i18n="services">Services</h3>
+          </div>
+          <ul class="action-list">
+            <li>
+              <a class="action-row action-row--primary" href="send.html">
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 7.5A4.5 4.5 0 1 0 12 3"/><path d="M7.5 16.5A4.5 4.5 0 1 0 12 21"/><path d="M12 3v4.2M12 21v-4.2M14.2 5.2 12 7.2 9.8 5.2M9.8 18.8 12 16.8l2.2 2"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="sendMoney">Send Money</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <button class="action-row" type="button" data-soon>
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.8 19c.6-3 2.7-4.6 5.2-4.6s4.6 1.6 5.2 4.6"/><path d="M17 8v6M14 11h6"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="addBeneficiary">Add Beneficiary</strong>
+                </span>
+              </button>
+            </li>
+            <li>
+              <a class="action-row" href="rates.html">
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 8.2h9.2M13.8 5.6 16.6 8.2 13.8 10.8"/><path d="M16.8 15.8H7.6M10.2 13.2 7.4 15.8 10.2 18.4"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="ratesTitle">Exchange rates</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <button class="action-row" type="button" data-soon>
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10a2 2 0 0 1 2 2v14l-3-2-3 2-3-2-3 2V6a2 2 0 0 1 2-2Z"/><path d="M9 9h6M9 13h4"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="payBill">Pay Bills</strong>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button class="action-row" type="button" data-soon>
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="transactions">My Previous Transaction</strong>
+                </span>
+              </button>
+            </li>
+            <li>
+              <button class="action-row" type="button" data-soon>
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M4 12h16M12 3.8c2.4 2.4 3.6 5.2 3.6 8.2s-1.2 5.8-3.6 8.2c-2.4-2.4-3.6-5.2-3.6-8.2S9.6 6.2 12 3.8Z"/></svg>
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="orderCurrency">Order Foreign Currency</strong>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </section>
+
+        <section class="home-last-tx">
+          <div class="home-section-head">
+            <h3 data-i18n="lastTx">Latest transactions</h3>
+          </div>
+          <ul class="last-tx-grid">
+            <li>
+              <article class="last-tx-card">
+                <strong>Faruque</strong>
+                <span class="last-tx-place">
+                  <img src="https://flagcdn.com/w80/bd.png" width="32" height="24" alt="" />
+                  Bangladesh
+                </span>
+                <span class="last-tx-bank">Islami Bank Bangladesh Limited</span>
+                <span class="last-tx-amt">50.000 KWD</span>
+                <span class="last-tx-recv">19,875.00 BDT</span>
+                <span class="last-tx-date">Today</span>
+                <button class="last-tx-send" type="button" data-send-again="faruque" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Salma</strong>
+                <span class="last-tx-place">
+                  <img src="https://flagcdn.com/w80/bd.png" width="32" height="24" alt="" />
+                  Bangladesh
+                </span>
+                <span class="last-tx-bank">Islami Bank Bangladesh Limited</span>
+                <span class="last-tx-amt">25.000 KWD</span>
+                <span class="last-tx-recv">9,505.75 BDT</span>
+                <span class="last-tx-date">Yesterday</span>
+                <button class="last-tx-send" type="button" data-send-again="salma" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Rajesh</strong>
+                <span class="last-tx-place">
+                  <img src="https://flagcdn.com/w80/in.png" width="32" height="24" alt="" />
+                  India
+                </span>
+                <span class="last-tx-bank">HDFC Bank, Andheri West</span>
+                <span class="last-tx-amt">100.000 KWD</span>
+                <span class="last-tx-recv">27,265.00 INR</span>
+                <span class="last-tx-date">30 Aug 2026</span>
+                <button class="last-tx-send" type="button" data-send-again="rajesh" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Ahmed</strong>
+                <span class="last-tx-place">
+                  <img src="https://flagcdn.com/w80/pk.png" width="32" height="24" alt="" />
+                  Pakistan
+                </span>
+                <span class="last-tx-bank">Habib Bank Limited, Karachi</span>
+                <span class="last-tx-amt">20.000 KWD</span>
+                <span class="last-tx-recv">18,144.00 PKR</span>
+                <span class="last-tx-date">28 Aug 2026</span>
+                <button class="last-tx-send" type="button" data-send-again="ahmed" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Maria</strong>
+                <span class="last-tx-place">
+                  <img src="https://flagcdn.com/w80/ph.png" width="32" height="24" alt="" />
+                  Philippines
+                </span>
+                <span class="last-tx-bank">BDO Unibank, Manila</span>
+                <span class="last-tx-amt">15.000 KWD</span>
+                <span class="last-tx-recv">2,841.00 PHP</span>
+                <span class="last-tx-date">25 Aug 2026</span>
+                <button class="last-tx-send" type="button" data-send-again="maria" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+          </ul>
+        </section>
+    </main>
+  </div>
+
+  <div class="notify-backdrop" id="notifyBackdrop"></div>
+  <aside class="notify-drawer" id="notifyDrawer" aria-hidden="true">
+    <div class="notify-drawer__head">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button class="notify-drawer__close" id="notifyClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </button>
+    </div>
+    <ul class="news-list">
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong>Maintenance Update</strong>
+          <p>Our services will be unavailable on May 30th from 1:00 AM to 3:00 AM.</p>
+          <small>May 24, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong>New Branch Opening</strong>
+          <p>We’re opening a new branch in Salmiya on June 15th</p>
+          <small>May 22, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyTransfer">Your transfer to India was completed.</strong>
+          <small>Today</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong data-i18n="notifyRate">INR rate improved on your saved corridor.</strong>
+          <small>Yesterday</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyReward">Prestige reward points were credited.</strong>
+          <small>May 20, 2025</small>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+<button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <span class="support__icon" aria-hidden="true">
+      <span class="support__pulse"></span>
+      <span class="support__pulse support__pulse--delay"></span>
+      <span class="support__badge">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3.2A6.8 6.8 0 0 0 5.2 10v2.1A2.6 2.6 0 0 0 7.8 14.7h.9v-4H7.4V10a4.6 4.6 0 0 1 9.2 0v.7h-1.3v4h.9a2.6 2.6 0 0 0 2.6-2.6V10A6.8 6.8 0 0 0 12 3.2Z"/>
+          <path d="M8.7 16.8V18a3.3 3.3 0 0 0 6.6 0v-1.2"/>
+          <circle cx="8.3" cy="12.6" r="1.35"/>
+          <circle cx="15.7" cy="12.6" r="1.35"/>
+        </svg>
+      </span>
+      <span class="support__dot"></span>
+    </span>
+    <span class="support__copy" aria-hidden="true">
+      <span data-i18n="support">support</span>
+      <small data-i18n="supportLive">We're online</small>
+    </span>
+  </button>
+
+<div class="overlay" id="overlay" hidden></div>
+
+  <nav class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__head">
+      <p class="drawer__hello">
+        <span class="welcome__hello">
+          <span data-i18n="welcome">Hello</span>
+          <span class="welcome__name" data-user-first hidden></span>
+          <a class="welcome__prestige-link" href="prestige.html">
+            <img class="welcome__prestige" src="images/prestige.svg" alt="Prestige member" data-i18n-alt="prestigeMember" />
+          </a>
+        </span>
+        <small data-i18n="welcomeSub">Good morning</small>
+      </p>
+      <button class="drawer__back" id="drawerBack" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="back">Back</span>
+      </button>
+      <button class="drawer__close" id="closeMenu" type="button" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 7l10 10M17 7 7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="drawer__stage">
+      <div class="drawer__page is-on" id="drawerHome">
+      <div class="drawer__group">
+        <button class="drawer__item" type="button" data-menu="dashboard">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.8 11.2 12 4.6l7.2 6.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.2 10.6V18.4h9.6v-7.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </span>
+          <span data-i18n="dashboardTitle">Home</span>
+        </button>
+        <button class="drawer__item" type="button" data-menu="prestige">
+          <span class="drawer__glyph" aria-hidden="true">
+            <img src="images/prestige.svg" alt="" width="22" height="22" />
+          </span>
+          <span data-i18n="prestige">Prestige</span>
+        </button>
+        <button class="drawer__item" type="button" data-menu="branches">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3.8a6.2 6.2 0 0 0-6.2 6.2c0 4.6 6.2 10.2 6.2 10.2s6.2-5.6 6.2-10.2A6.2 6.2 0 0 0 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="10" r="2.1" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+          </span>
+          <span data-i18n="branches">Branches</span>
+        </button>
+        <button class="drawer__item" type="button" data-menu="rates">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M7.2 8.2h9.2M13.8 5.6 16.6 8.2 13.8 10.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.8 15.8H7.6M10.2 13.2 7.4 15.8 10.2 18.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span data-i18n="rates">Exchange Rate Enquiry</span>
+        </button>
+      </div>
+      <div class="drawer__group">
+        <button class="drawer__item" type="button" data-menu="notifications">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 4.4a4.8 4.8 0 0 0-4.8 4.8v2.4c0 .7-.28 1.38-.78 1.86L5.4 14.7h13.2l-1.02-1.24c-.5-.48-.78-1.16-.78-1.86V9.2A4.8 4.8 0 0 0 12 4.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 16.8a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </span>
+          <span data-i18n="notifications">Notifications</span>
+        </button>
+        <button class="drawer__item" type="button" id="fontSizeBtn">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.6 17.2 8.1 7.6l3.5 9.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 13.8h4.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M13 17.2 17.4 6.2 21.8 17.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.6 13.4h5.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </span>
+          <span data-i18n="fontSize">Font Size</span>
+        </button>
+      </div>
+      <div class="drawer__group">
+        <div class="drawer__item drawer__item--lang">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 12h16M12 3.8c2.4 2.4 3.6 5.2 3.6 8.2s-1.2 5.8-3.6 8.2c-2.4-2.4-3.6-5.2-3.6-8.2S9.6 6.2 12 3.8Z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+          </span>
+          <div class="drawer__lang-block">
+            <span data-i18n="changeLanguage">Change Language</span>
+            <div class="drawer__langs">
+              <button class="drawer__chip is-on" type="button" data-set-lang="en">English</button>
+              <span class="drawer__or" data-i18n="or">Or</span>
+              <button class="drawer__chip" type="button" data-set-lang="ar">العربية</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="drawer__group">
+        <button class="drawer__item" type="button" data-menu="demo">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="4.2" y="6.2" width="15.6" height="11.6" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M10.6 9.6v4.8L15.4 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </span>
+          <span data-i18n="demo">Demo</span>
+        </button>
+        <button class="drawer__item" type="button" data-menu="support">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9.15 9.1a2.85 2.85 0 1 1 3.55 2.72c-.82.38-1.2.9-1.2 1.78" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="16.7" r="1" fill="currentColor"/></svg>
+          </span>
+          <span data-i18n="helpSupport">Help &amp; Support</span>
+        </button>
+        <button class="drawer__item" type="button" id="dashLogoutBtn">
+          <span class="drawer__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M10 7V5a2 2 0 0 1 2-2h7v18h-7a2 2 0 0 1-2-2v-2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M14 12H4M7 9l-3 3 3 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span data-i18n="logout">Logout</span>
+        </button>
+      </div>
+      </div>
+      <div class="drawer__page" id="drawerHelp">
+        <p class="drawer__label" data-i18n="getInTouch">Get in touch</p>
+        <div class="drawer__group">
+          <a class="drawer__item drawer__item--stack" href="tel:+9651840123">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7.4 3.8h2.8l1.2 3.6-2 1.2a11.4 11.4 0 0 0 5 5l1.2-2 3.6 1.2v2.8c0 .8-.7 1.5-1.5 1.5A14.4 14.4 0 0 1 5.9 5.3c0-.8.7-1.5 1.5-1.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="drawer__meta">
+              <strong data-i18n="callUs">Call Us</strong>
+              <small>+965 1840123</small>
+            </span>
+          </a>
+          <a class="drawer__item drawer__item--stack" href="https://wa.me/9651840123" target="_blank" rel="noopener">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3.5a8.2 8.2 0 0 0-7 12.5L4 20.5l4.7-1.2A8.2 8.2 0 1 0 12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.4c.2-.5.4-.5.7-.5h.6c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.2.6l-.5.4a6 6 0 0 0 2.6 2.6l.4-.5c.2-.2.4-.3.6-.2l1.7.7c.3.1.4.3.4.5v.6c0 .3 0 .5-.5.7A7 7 0 0 1 9.2 9.4Z" fill="currentColor"/></svg>
+            </span>
+            <span class="drawer__meta">
+              <strong data-i18n="whatsapp">WhatsApp</strong>
+              <small data-i18n="whatsappChat">Chat with Us on WhatsApp</small>
+            </span>
+          </a>
+        </div>
+        <p class="drawer__label" data-i18n="followUs">Follow Us</p>
+        <div class="drawer__group">
+          <a class="drawer__item" href="https://www.instagram.com/almullaexchange/" target="_blank" rel="noopener">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4.4" y="4.4" width="15.2" height="15.2" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="16.6" cy="7.4" r="0.9" fill="currentColor"/></svg>
+            </span>
+            <span>Instagram</span>
+          </a>
+          <a class="drawer__item" href="https://www.linkedin.com/company/al-mulla-exchange" target="_blank" rel="noopener">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4.4" y="4.4" width="15.2" height="15.2" rx="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M8.4 10.2V16M8.4 8.1v.1M11.4 16v-3.4c0-1.3.9-2.2 2.1-2.2s2.1.9 2.1 2.2V16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </span>
+            <span>Linkedin</span>
+          </a>
+          <a class="drawer__item" href="https://www.facebook.com/AlMullaExchange" target="_blank" rel="noopener">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4.4" y="4.4" width="15.2" height="15.2" rx="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M13.2 16.4v-4.2h1.6l.3-1.8h-1.9V9.4c0-.5.2-.9.9-.9h1.1V6.8S14.6 6.6 13.8 6.6c-1.7 0-2.8 1-2.8 2.9v1.5H9.4v1.8h1.6v4.2h2.2Z" fill="currentColor"/></svg>
+            </span>
+            <span>Facebook</span>
+          </a>
+          <a class="drawer__item" href="https://x.com/almullaexchange" target="_blank" rel="noopener">
+            <span class="drawer__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m7.2 6.6 9.6 10.8M16.8 6.6 7.2 17.4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+            </span>
+            <span>x</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <dialog class="modal" id="branchesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="branchesTitle">Our branches</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="list">
+      <li>Salmiya — Amman Street</li>
+      <li>Kuwait City — Fahad Al Salem</li>
+      <li>Hawally — Beirut Street</li>
+      <li>Fahaheel — Ajial Complex</li>
+      <li>Jahra — Block 3</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="ratesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="ratesTitle">Exchange rates</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <table class="rates">
+      <thead>
+        <tr><th></th><th data-i18n="currency">Currency</th><th data-i18n="oneKwd">1 KWD</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /></td><td>USD</td><td>3.2570</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eu.png" width="22" height="16" alt="" /></td><td>EUR</td><td>3.0124</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/gb.png" width="22" height="16" alt="" /></td><td>GBP</td><td>2.5481</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/in.png" width="22" height="16" alt="" /></td><td>INR</td><td>271.85</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/pk.png" width="22" height="16" alt="" /></td><td>PKR</td><td>907.40</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/bd.png" width="22" height="16" alt="" /></td><td>BDT</td><td>396.12</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ph.png" width="22" height="16" alt="" /></td><td>PHP</td><td>186.55</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eg.png" width="22" height="16" alt="" /></td><td>EGP</td><td>157.80</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/sa.png" width="22" height="16" alt="" /></td><td>SAR</td><td>12.215</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ae.png" width="22" height="16" alt="" /></td><td>AED</td><td>11.968</td></tr>
+      </tbody>
+    </table>
+    <p class="fine" data-i18n="ratesNote">Indicative rates. 1 KWD to each currency. Final rate confirmed at transaction.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="dash-notes">
+      <li data-i18n="notifyTransfer">Your transfer to India was completed.</li>
+      <li data-i18n="notifyRate">INR rate improved on your saved corridor.</li>
+      <li data-i18n="notifyReward">Prestige reward points were credited.</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+    <script src="app.js"></script>
+  <script src="dashboard.js?v=send-page"></script>
+</body>
+</html>
