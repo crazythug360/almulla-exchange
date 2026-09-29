@@ -1,0 +1,36 @@
+<svg width="36" height="38" viewBox="0 0 36 38" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="xlt3j2kqlc">
+            <stop stop-color="#00AE42" offset="0%" />
+            <stop stop-color="#00AE42" offset="100%" />
+        </linearGradient>
+        <filter x="-16.7%" y="-20%" width="133.3%" height="140%" filterUnits="objectBoundingBox"
+            id="uuv7nnjbsa">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter1" result="shadowMatrixOuter1" />
+            <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetOuter2" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter2" result="shadowBlurOuter2" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter2" result="shadowMatrixOuter2" />
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1" />
+                <feMergeNode in="shadowMatrixOuter2" />
+            </feMerge>
+        </filter>
+        <circle id="tlrkrp2u0b" cx="15" cy="15" r="15" />
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(3 4)">
+            <use fill="#00AE42" filter="url(#uuv7nnjbsa)" xlink:href="#tlrkrp2u0b" />
+            <use fill="#FFF" xlink:href="#tlrkrp2u0b" />
+        </g>
+        <path
+            d="M10.023 0C15.25 0 19.539 3.985 20 9.068h-8.155v-2.72a.908.908 0 0 0-.562-.838.914.914 0 0 0-.993.197L6.645 9.334a.903.903 0 0 0 0 1.282l3.645 3.627c.26.26.652.338.993.197a.908.908 0 0 0 .562-.838v-2.72H20c-.461 5.083-4.75 9.068-9.977 9.068C4.487 19.95 0 15.484 0 9.975 0 4.466 4.487 0 10.023 0z"
+            transform="translate(8 8.876)" fill="url(#xlt3j2kqlc)" fill-rule="nonzero" />
+    </g>
+</svg>

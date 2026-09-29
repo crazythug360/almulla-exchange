@@ -1,0 +1,56 @@
+<svg width="36" height="38" viewBox="0 0 36 38" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="qsae9r3r6c">
+            <stop stop-color="#00B935" offset="0%" />
+            <stop stop-color="#00B935" offset="100%" />
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="1yk9n3g0xd">
+            <stop stop-color="#00B935" offset="0%" />
+            <stop stop-color="#00B935" offset="100%" />
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="4cd1kk42kf">
+            <stop stop-color="#00B935" offset="0%" />
+            <stop stop-color="#00B935" offset="100%" />
+        </linearGradient>
+        <filter x="-16.7%" y="-20%" width="133.3%" height="140%" filterUnits="objectBoundingBox"
+            id="s24slpkb6a">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter1" result="shadowMatrixOuter1" />
+            <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetOuter2" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter2" result="shadowBlurOuter2" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter2" result="shadowMatrixOuter2" />
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1" />
+                <feMergeNode in="shadowMatrixOuter2" />
+            </feMerge>
+        </filter>
+        <circle id="t6b9hbu9cb" cx="15" cy="15" r="15" />
+        <path id="3yqcrtktje" d="M0 0h7.979v9.732H0z" />
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(3 4)">
+            <use fill="#00B935" filter="url(#s24slpkb6a)" xlink:href="#t6b9hbu9cb" />
+            <use fill="#FFF" xlink:href="#t6b9hbu9cb" />
+        </g>
+        <path fill="url(#qsae9r3r6c)" fill-rule="nonzero"
+            d="m13.432 0-.875 5.818L11.69 0H7.902l-.869 5.668L6.178 0H2.875l1.998 9.2h4.112l.83-5.955.841 5.955h4.054L16.675 0z"
+            transform="translate(6 15)" />
+        <path fill="url(#1yk9n3g0xd)" fill-rule="nonzero"
+            d="m0 0 1.79 9.2h.51L.51 0zM1.725 0l1.79 9.2h.51L2.235 0z"
+            transform="translate(6 15)" />
+        <g transform="translate(20.993 15.043)">
+            <mask id="gzr5ii02sg" fill="#fff">
+                <use xlink:href="#3yqcrtktje" />
+            </mask>
+            <path
+                d="M4.311 0v5.933c0 .39-.076.694-.228.915a.731.731 0 0 1-.637.33c-.282 0-.497-.106-.645-.318-.147-.211-.221-.52-.221-.927V0h-.716L0 8.78c.343.297.752.522 1.229.674.584.185 1.322.278 2.217.278 1.55 0 2.693-.32 3.429-.962.736-.642 1.104-1.637 1.104-2.986V0H4.31z"
+                fill="url(#4cd1kk42kf)" fill-rule="nonzero" mask="url(#gzr5ii02sg)" />
+        </g>
+    </g>
+</svg>

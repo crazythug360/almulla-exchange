@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Exchange Rate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-rates">
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+
+
+  <div class="page-titlebar">
+    <a class="page-back" href="dashboard.html">
+                  <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+                </a>
+    <h1 data-i18n="exchangeRateTitle">Exchange Rate</h1>
+  </div>
+
+  <main class="rates-shell">
+    <p class="rates-disclaimer">
+      <span class="rates-disclaimer__icon" aria-hidden="true">i</span>
+      <span data-i18n="ratesDisclaimer">Rates shown are indicative and subject to change.</span>
+    </p>
+
+    <div class="rates-layout">
+      <section class="rates-inputs" aria-label="Remittance amounts">
+        <div class="field field--float field--select has-value" id="countryField">
+          <button class="field__control" id="countryBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="countryMenu">
+            <img class="field__flag" id="countryFlag" src="https://flagcdn.com/w40/in.png" width="28" height="20" alt="" />
+            <span class="field__country" id="countryName">India</span>
+            <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="field__label" data-i18n="destCountry">Destination Country</span>
+          <div class="country-panel" id="countryPanel" hidden>
+            <label class="country-panel__search">
+              <svg class="country-panel__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+              <input id="countrySearch" type="search" autocomplete="off" spellcheck="false" placeholder="Search" aria-label="Search" />
+            </label>
+            <ul class="country-menu" id="countryMenu" role="listbox"></ul>
+          </div>
+        </div>
+
+        <label class="field field--float field--amount has-value">
+          <input id="sendAmount" type="text" inputmode="decimal" autocomplete="off" value="100" />
+          <span class="field__label" data-i18n="send">Send</span>
+          <span class="field__ccy">KWD</span>
+        </label>
+
+        <div class="field field--float field--receive has-value" id="ccyField">
+          <div class="field__combo">
+            <input id="receiveAmount" type="text" inputmode="decimal" autocomplete="off" value="27185" />
+            <button class="field__ccy-select" id="ccyBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="ccyMenu">
+              <span class="field__country" id="receiveCcy">INR</span>
+              <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+          <span class="field__label" data-i18n="receive">Receive</span>
+          <ul class="country-menu" id="ccyMenu" role="listbox" hidden></ul>
+        </div>
+      </section>
+
+      <section class="rates-options" aria-label="Payout options">
+        <div class="rates-more">
+          <span class="rates-more__badge" aria-hidden="true">
+            <img class="rates-more__badge-icon" src="assets/images/toggleRate.svg" width="22" height="22" alt="" />
+          </span>
+          <span class="rates-more__copy" data-i18n="moreRates">Click for more rates</span>
+          <button class="switch" id="moreRates" type="button" role="switch" aria-checked="false" data-i18n-aria="moreRates" aria-label="Click for more rates"></button>
+        </div>
+        <div class="rate-cards" id="rateCards" role="radiogroup" aria-label="Payout options"></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="bottom-actions rates-actions">
+    <button class="bottom-actions__btn rates-actions__share" type="button" id="shareBtn">
+      <span data-i18n="share">Share</span>
+    </button>
+    <button class="bottom-actions__btn rates-actions__send" type="button" id="ratesSendBtn">
+      <span data-i18n="sendMoney">Send Money</span>
+    </button>
+  </div>
+
+  <button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<div class="rate-info" id="rateInfo" hidden aria-hidden="true">
+    <div class="rate-info__backdrop" data-close-info></div>
+    <aside class="rate-info__panel" role="dialog" aria-modal="true" aria-labelledby="rateInfoLead" id="rateInfoPanel">
+      <header class="modal-head rate-info__head">
+        <span class="modal-head__title"></span>
+        <button type="button" class="modal-head__close" data-close-info aria-label="Close">
+          <img src="assets/images/close.svg" width="24" height="24" alt="" />
+        </button>
+      </header>
+      <img class="rate-info__mark" src="assets/images/ex_rate_info.svg" width="88" height="88" alt="" aria-hidden="true" />
+      <p class="rate-info__lead" id="rateInfoLead"></p>
+      <p class="rate-info__note" id="rateInfoNote"></p>
+      <p class="rate-info__body" id="rateInfoBody"></p>
+      <button type="button" class="btn btn--login rate-info__ok" id="rateInfoOk" data-close-info data-i18n="ok">Ok</button>
+    </aside>
+  </div>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="noNotifications">No new notifications.</p>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=79"></script>
+  <script src="js/pages/rates.js?v=21"></script>
+</body>
+</html>

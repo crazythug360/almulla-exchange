@@ -1,0 +1,95 @@
+/* Master hamburger drawer — typography aligned with dashboard / Send Money headers
+   HTML: partials/drawer.html (loaded by drawer.js) */
+
+.drawer__hello span,
+.drawer__hello .welcome__hello,
+.drawer__hello .welcome__label,
+.drawer__hello .welcome__name {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  color: var(--fc-inverse, #fff);
+}
+
+.drawer__hello .welcome__hello {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.drawer__hello .welcome__label,
+.drawer__hello .welcome__name {
+  color: var(--fc-inverse, #fff);
+}
+
+/* Keep greeting English (LTR) even when the app is Arabic */
+.drawer__hello[lang="en"] {
+  direction: ltr;
+  text-align: start;
+  unicode-bidi: isolate;
+}
+
+.drawer__hello .drawer__last-login,
+.drawer__hello small.drawer__last-login {
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
+  color: var(--fc-inverse, #fff);
+  opacity: 0.92;
+}
+
+.drawer__item {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-snug);
+}
+
+.drawer__item > span:not(.drawer__glyph):not(.drawer__meta):not(.drawer__lang-block):not(.drawer__chevron) {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-medium);
+}
+
+.drawer__back {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.drawer__label {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.drawer__meta strong {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+.drawer__meta small {
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-regular);
+}
+
+.drawer__chip {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-medium);
+}
+
+.drawer__toggle .drawer__toggle-btn {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.drawer__or {
+  font-size: var(--fs-meta);
+}
+
+.drawer__item.is-current {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.drawer__item.is-current .drawer__glyph {
+  color: var(--color-primary);
+}

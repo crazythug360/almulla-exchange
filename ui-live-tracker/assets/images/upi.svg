@@ -1,0 +1,11 @@
+<svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero">
+            <path d="M71.005 2 80 21.003 61.09 40z" fill="#27803B"/>
+            <path d="m63.924 2 8.985 19.003L54 40z" fill="#E9661C"/>
+        </g>
+        <text font-family="Inter-Regular_Black-Italic, Inter" font-size="33" font-style="italic" font-weight="600" letter-spacing="-.977" fill="#000">
+                    <tspan x="0" y="32">UPI</tspan>
+                </text>
+    </g>
+</svg>

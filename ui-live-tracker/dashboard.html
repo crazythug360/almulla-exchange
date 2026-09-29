@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard">
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+<div class="app" id="app">
+    <main class="content content--home">
+        <section class="home-search bene-search-section">
+          <p class="home-kicker" data-i18n="whoSending">Who are you sending to?</p>
+          <div class="bene-search-wrap">
+            <label class="bene-search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="bene-search-slot">
+                <input type="search" id="beneSearch" data-i18n-aria="searchBeneAria" aria-label="Search by beneficiary name, account number, or mobile number" placeholder="" autocomplete="off" />
+                <span class="bene-search-hint" id="beneSearchHint" aria-hidden="true">
+                  <span class="bene-search-hint__text"></span>
+                  <span class="bene-search-hint__caret"></span>
+                </span>
+              </span>
+            </label>
+            <ul class="bene-suggest" id="beneSuggest" hidden></ul>
+          </div>
+
+          <article class="bene-remit-card is-hidden" id="beneRemitCard">
+            <div class="bene-remit-head">
+              <div>
+                <h4 id="remitName"></h4>
+                <p class="bene-acc" id="remitAcc"></p>
+                <p class="bene-bank" id="remitBank"></p>
+              </div>
+              <button type="button" class="remit-close" id="remitClose" aria-label="Close">×</button>
+            </div>
+            <div class="bene-amount-row">
+              <div class="amount-field">
+                <span data-i18n="enterAmount">Enter Amount</span>
+                <input class="amount-input" id="remitAmount" type="number" min="0" step="1" value="25" />
+                <span class="ccy-toggle" id="remitCcyToggle">
+                  <button type="button" class="is-active" data-ccy="KWD">KWD</button>
+                  <span>|</span>
+                  <button type="button" data-ccy="RECV">BDT</button>
+                </span>
+              </div>
+              <button type="button" class="proceed-btn" id="remitProceed">
+                <span data-i18n="sendBtn">Send</span>
+              </button>
+            </div>
+            <p class="bene-rate" id="remitRateLine"></p>
+            <p class="bene-total" id="remitTotalLine"></p>
+            <p class="remit-success is-hidden" id="remitSuccess"></p>
+          </article>
+        </section>
+
+        <section class="home-actions">
+          <div class="home-section-head">
+            <h3 data-i18n="services">Services</h3>
+          </div>
+          <ul class="action-list">
+            <li>
+              <a class="action-row" href="send.html?bene=faruque">
+                <span class="action-icon">
+                  <img src="assets/images/services/send-money.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcSelectBeneficiary">Send<br>Money</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="action-row" href="add-beneficiary.html">
+                <span class="action-icon">
+                  <img src="assets/images/services/add-beneficiary.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcAddBeneficiary">Add<br>Beneficiary</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="action-row" href="transactions.html">
+                <span class="action-icon">
+                  <img src="assets/images/services/my-previous-transaction.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcPrevTxn">My Previous<br>Transaction</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="action-row" href="fx-order.html">
+                <span class="action-icon">
+                  <img src="assets/images/fxorder_ico.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcOrderFx">Order Foreign<br>Currency</strong>
+                </span>
+              </a>
+            </li>
+            <li>
+              <button class="action-row" type="button" data-soon>
+                <span class="action-icon">
+                  <img src="assets/images/services/pay-local-bill.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcPayBills">Pay<br>Bills</strong>
+                </span>
+              </button>
+            </li>
+            <li>
+              <a class="action-row" href="rates.html">
+                <span class="action-icon">
+                  <img src="assets/images/services/exchange-rate.svg" alt="" width="52" height="52" />
+                </span>
+                <span class="action-copy">
+                  <strong data-i18n="svcExchangeRates">Exchange<br>Rates</strong>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section class="home-last-tx">
+          <div class="home-section-head">
+            <h3 data-i18n="lastTx">Favourite Beneficiaries</h3>
+          </div>
+          <ul class="last-tx-grid">
+            <li>
+              <article class="last-tx-card">
+                <strong>Md Faruque Habibur Rahman Msa</strong>
+                <span class="last-tx-place">
+                  <b class="last-tx-country">Bangladesh</b>
+                </span>
+                <span class="last-tx-bank">Islami Bank Bangladesh Limited</span>
+                <span class="last-tx-account">20504090200155113</span>
+                <button class="last-tx-send" type="button" data-send-again="faruque" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Salma Akter</strong>
+                <span class="last-tx-place">
+                  <b class="last-tx-country">Bangladesh</b>
+                </span>
+                <span class="last-tx-bank">Islami Bank Bangladesh Limited</span>
+                <span class="last-tx-account">20507770236314512</span>
+                <button class="last-tx-send" type="button" data-send-again="salma" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Rajesh Kumar</strong>
+                <span class="last-tx-place">
+                  <b class="last-tx-country">India</b>
+                </span>
+                <span class="last-tx-bank">HDFC Bank, Andheri West</span>
+                <span class="last-tx-account">3019288377462210</span>
+                <button class="last-tx-send" type="button" data-send-again="rajesh" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+            <li>
+              <article class="last-tx-card">
+                <strong>Ahmed Hassan</strong>
+                <span class="last-tx-place">
+                  <b class="last-tx-country">Pakistan</b>
+                </span>
+                <span class="last-tx-bank">Habib Bank Limited, Karachi</span>
+                <span class="last-tx-account">PK92HABB0000123456789012</span>
+                <button class="last-tx-send" type="button" data-send-again="ahmed" data-i18n="sendMoney">Send Money</button>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <section class="home-hero" aria-roledescription="carousel" aria-label="Promotions">
+          <div class="home-hero__track">
+            <img class="home-hero__slide is-active" src="assets/images/banners/banner-main.png?v=350" alt="" />
+            <img class="home-hero__slide" src="assets/images/banners/banner2.png?v=350" alt="" />
+            <img class="home-hero__slide" src="assets/images/banners/banner3.png?v=350" alt="" />
+          </div>
+          <h2 class="home-hero__title" data-i18n="sendHomeTitle">Send money home in minutes</h2>
+          <div class="home-hero__dots" role="tablist" aria-label="Banner slides">
+            <button class="home-hero__dot is-active" type="button" role="tab" aria-label="Slide 1" aria-selected="true" data-hero-slide="0"></button>
+            <button class="home-hero__dot" type="button" role="tab" aria-label="Slide 2" aria-selected="false" data-hero-slide="1"></button>
+            <button class="home-hero__dot" type="button" role="tab" aria-label="Slide 3" aria-selected="false" data-hero-slide="2"></button>
+          </div>
+          <a class="home-hero__cta" href="beneficiaries.html" data-i18n="selectBeneficiary">Select Beneficiary</a>
+        </section>
+    </main>
+  </div>
+
+  <div class="notify-backdrop" id="notifyBackdrop"></div>
+  <aside class="notify-drawer" id="notifyDrawer" aria-hidden="true">
+    <div class="notify-drawer__head">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button class="notify-drawer__close" id="notifyClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </button>
+    </div>
+    <ul class="news-list">
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong>Maintenance Update</strong>
+          <p>Our services will be unavailable on May 30th from 1:00 AM to 3:00 AM.</p>
+          <small>May 24, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong>New Branch Opening</strong>
+          <p>We’re opening a new branch in Salmiya on June 15th</p>
+          <small>May 22, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyTransfer">Your transfer to India was completed.</strong>
+          <small>Today</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong data-i18n="notifyRate">INR rate improved on your saved corridor.</strong>
+          <small>Yesterday</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyReward">Prestige reward points were credited.</strong>
+          <small>May 20, 2025</small>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+<button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+<div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<dialog class="modal" id="branchesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="branchesTitle">Our branches</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="list">
+      <li>Salmiya — Amman Street</li>
+      <li>Kuwait City — Fahad Al Salem</li>
+      <li>Hawally — Beirut Street</li>
+      <li>Fahaheel — Ajial Complex</li>
+      <li>Jahra — Block 3</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="ratesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="ratesTitle">Exchange rates</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <table class="rates">
+      <thead>
+        <tr><th></th><th data-i18n="currency">Currency</th><th data-i18n="oneKwd">1 KWD</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /></td><td>USD</td><td>3.2570</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eu.png" width="22" height="16" alt="" /></td><td>EUR</td><td>3.0124</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/gb.png" width="22" height="16" alt="" /></td><td>GBP</td><td>2.5481</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/in.png" width="22" height="16" alt="" /></td><td>INR</td><td>271.85</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/pk.png" width="22" height="16" alt="" /></td><td>PKR</td><td>907.40</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/bd.png" width="22" height="16" alt="" /></td><td>BDT</td><td>396.12</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ph.png" width="22" height="16" alt="" /></td><td>PHP</td><td>186.55</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eg.png" width="22" height="16" alt="" /></td><td>EGP</td><td>157.80</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/sa.png" width="22" height="16" alt="" /></td><td>SAR</td><td>12.215</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ae.png" width="22" height="16" alt="" /></td><td>AED</td><td>11.968</td></tr>
+      </tbody>
+    </table>
+    <p class="fine" data-i18n="ratesNote">Indicative rates. 1 KWD to each currency. Final rate confirmed at transaction.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="dash-notes">
+      <li data-i18n="notifyTransfer">Your transfer to India was completed.</li>
+      <li data-i18n="notifyRate">INR rate improved on your saved corridor.</li>
+      <li data-i18n="notifyReward">Prestige reward points were credited.</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+    <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/pages/dashboard.js?v=send-page"></script>
+</body>
+</html>

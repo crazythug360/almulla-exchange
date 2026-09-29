@@ -1,0 +1,21 @@
+<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-21.9%" y="-15.6%" width="143.8%" height="143.8%" filterUnits="objectBoundingBox" id="2ccein4pda">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0.841485507 0 0 0 0 0.841485507 0 0 0 0 0.841485507 0 0 0 0.5 0" in="shadowBlurOuter1"/>
+        </filter>
+        <circle id="qpiawx9kpb" cx="16" cy="16" r="16"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(4 2)">
+            <use fill="#000" filter="url(#2ccein4pda)" xlink:href="#qpiawx9kpb"/>
+            <circle stroke="#85F2A1" stroke-width=".5" stroke-linejoin="square" fill="#FDFDFD" cx="16" cy="16" r="15.75"/>
+        </g>
+        <g fill="#000" fill-rule="nonzero">
+            <path d="m25.05 13.593 3.682.272.268-3.737-1.261-.093-.106 1.47A10.657 10.657 0 0 0 19.746 8C13.821 8 9 12.894 9 18.91c0 6.014 4.82 10.908 10.746 10.908 3.583 0 6.92-1.81 8.926-4.84l-1.05-.716c-1.77 2.675-4.714 4.272-7.876 4.272-5.228 0-9.481-4.318-9.481-9.625s4.253-9.625 9.481-9.625a9.404 9.404 0 0 1 7.006 3.147l-1.61-.119-.091 1.28z"/>
+            <path d="M14.235 20.542c0-.433.391-.714.947-1.025.638-.357 1.084-.767 1.084-1.649 0-1.04-.604-1.686-1.688-1.686-.933 0-1.626.494-1.928.873l.68.806c.246-.281.658-.6 1.097-.6.357 0 .59.212.59.623 0 .638-.57.911-1.152 1.2-.988.494-1.229 1.147-1.229 2.552h3.637v-1.094h-2.038zM20.212 19.393v-3.211h-.757l-2.273 3.211v1.099h1.928v1.144h1.102v-1.144h.606v-1.099h-.606zm-.978 0h-.957l.957-1.367v1.367zM24.18 17.639c-.552 0-1.033.269-1.305.732v-2.19h-1.148v5.455h1.148v-2.249c.143-.418.523-.695.796-.695.33 0 .545.232.545.74v2.204h1.148v-2.51c0-.68-.173-1.487-1.184-1.487z"/>
+        </g>
+    </g>
+</svg>

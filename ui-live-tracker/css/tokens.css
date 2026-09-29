@@ -1,0 +1,316 @@
+/* Al Mulla Exchange — design tokens
+   Single source of truth for color, type, space, radius, shadow, motion, and
+   shared component metrics. Prefer these tokens over hardcoded values.
+   Colors 1–5 are taken from assets/images/brand/logo-almulla-exchange.svg only. */
+
+:root {
+  color-scheme: light;
+
+  /* —— Color scale (logo) —— */
+  --color-primary: #00AE42;
+  --color-secondary: #00AE42;
+  --color-tertiary: #00833E;
+  --color-fourth: #00953B;
+  --color-fifth: #00A651;
+
+  --color-primary-rgb: 0, 174, 66;
+  --color-secondary-rgb: 0, 174, 66;
+  --color-tertiary-rgb: 0, 131, 62;
+  --color-fourth-rgb: 0, 149, 59;
+  --color-fifth-rgb: 0, 166, 81;
+
+  /* —— Neutrals (logo ink + UI) —— */
+  --color-ink: #231F20;
+  --color-ink-rgb: 35, 31, 32;
+  --color-muted: #4A4A4A;
+  --color-line: #c9d4c6;
+  --color-paper: #ffffff;
+  --color-paper-2: #f3f7f4;
+  --color-inverse: #ffffff;
+  --color-hint-unmet: #8B1E3F;
+
+  /* —— Semantic status (reuse brand where possible) —— */
+  --color-success: var(--color-primary);
+  --color-success-rgb: var(--color-primary-rgb);
+  --color-success-bg: rgba(var(--color-primary-rgb), 0.1);
+  --color-warning: #8B6914;
+  --color-warning-rgb: 139, 105, 20;
+  --color-warning-bg: rgba(139, 105, 20, 0.12);
+  --color-danger: #8B1E3F;
+  --color-danger-rgb: 139, 30, 63;
+  --color-danger-bg: rgba(139, 30, 63, 0.1);
+  --color-info: var(--color-secondary);
+  --color-info-rgb: var(--color-secondary-rgb);
+  --color-info-bg: rgba(var(--color-secondary-rgb), 0.08);
+  --color-focus: var(--color-primary);
+  --color-focus-ring: rgba(var(--color-primary-rgb), 0.14);
+  --color-hover: var(--color-tertiary);
+  --color-disabled: #d4d0c6;
+  --color-disabled-text: #8a8a8a;
+
+  /* —— Surfaces (login panel, labels, inputs) —— */
+  --surface-page: var(--color-paper-2);
+  --surface-panel: linear-gradient(180deg, #ffffff 0%, #f4faf6 52%, #eaf6ee 100%);
+  --surface-panel-side: linear-gradient(180deg, #ffffff 0%, #f4faf6 100%);
+  --surface-card: #ffffff;
+  --surface-input: #ffffff;
+  --surface-label: #f7fbf8;
+  --surface-readonly: #f7f4ec;
+  --surface-hover: #f4faf6;
+  --surface-disabled: #d4d0c6;
+  --btn-disabled: #C2F3D5;
+  --surface-ticker: #f3f8f4;
+  --surface-overlay: rgba(35, 31, 32, 0.45);
+  /* Very fine gray inset / summary strip — project-wide */
+  --surface-subtle: #f5f5f5;
+  --surface-subtle-divider: rgba(var(--color-ink-rgb), 0.08);
+  --color-hairline: #d7eadc;
+  --color-drawer-line: #e6ece7;
+  --color-border: var(--color-line);
+  --color-border-strong: rgba(var(--color-ink-rgb), 0.18);
+  --color-border-soft: rgba(var(--color-ink-rgb), 0.08);
+
+  /* —— Semantic aliases —— */
+  --green: #00AE42;
+  --green-rgb: 0, 174, 66;
+  --forest: #00AE42;
+  --moss: #00AE42;
+  --moss-deep: #006241;
+  --sage: #00833E;
+  --ink: #231F20;
+  --muted: #4A4A4A;
+  --line: #c9d4c6;
+  --paper: #ffffff;
+  --paper-2: #f3f7f4;
+
+  /* —— Font family (Inter only; Noto for script coverage) —— */
+  --ff-noto: "Noto Sans Devanagari", "Noto Sans Telugu", "Noto Sans Arabic", "Noto Sans Bengali", "Noto Sans Malayalam", "Noto Sans Gujarati", system-ui, sans-serif;
+  --ff-sans: Inter, var(--ff-noto);
+  --ff-num: var(--ff-sans);
+  --ff-primary: var(--ff-sans);
+  --ff-fallback: var(--ff-noto);
+
+  /* —— Font size (Large only; meta never below 13px) —— */
+  --fs-title: 30px;
+  --fs-body: 21px;
+  --fs-desc: 16px;
+  --fs-meta: 14px;
+  --fs-meta-min: 13px;
+
+  /* Greeting and hero titles are fixed per display tier (no vw scaling). */
+  --fs-greet: 60px;
+  --fs-slide-title: 36px;
+  --fs-slide-body: var(--fs-desc);
+
+  /* Role aliases → four-size system */
+  --fs-h1: var(--fs-title);
+  --fs-h2: var(--fs-title);
+  --fs-h3: var(--fs-body);
+  --fs-h4: var(--fs-body);
+  --fs-body-lg: var(--fs-body);
+  --fs-body-md: var(--fs-body);
+  --fs-body-sm: var(--fs-desc);
+  --fs-caption: var(--fs-meta);
+  --fs-label: var(--fs-desc);
+  --fs-button: var(--fs-body);
+  --fs-input: var(--fs-desc);
+  --fs-placeholder: var(--fs-desc);
+  --fs-nav: var(--fs-desc);
+  --fs-table: var(--fs-desc);
+  --fs-helper: var(--fs-meta);
+  --fs-error: var(--fs-meta);
+
+  /* Auth form rhythm */
+  --form-gap: 16px;
+  --form-actions-gap: 40px;
+  --form-title-gap: var(--form-actions-gap);
+
+  --fs-2xs: var(--fs-meta);
+  --fs-xs: var(--fs-meta);
+  --fs-sm: var(--fs-meta);
+  --fs-md: var(--fs-desc);
+  --fs-base: var(--fs-body);
+  --fs-lg: var(--fs-body);
+  --fs-xl: var(--fs-body);
+  --fs-2xl: var(--fs-body);
+  --fs-3xl: var(--fs-body);
+  --fs-4xl: var(--fs-title);
+  --fs-5xl: var(--fs-title);
+  --fs-6xl: var(--fs-title);
+  --fs-7xl: var(--fs-title);
+  --fs-display: var(--fs-title);
+  --fs-hero: var(--fs-title);
+
+  /* —— Font weight (max semibold; no bold/extrabold) —— */
+  --fw-thin: 200;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  /* Aliases kept for legacy refs — capped at semibold */
+  --fw-bold: var(--fw-semibold);
+  --fw-extrabold: var(--fw-semibold);
+
+  /* —— Line height / tracking —— */
+  --lh-tight: 1.2;
+  --lh-snug: 1.35;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+  --ls-tight: -0.01em;
+  --ls-normal: 0;
+  --ls-wide: 0.02em;
+
+  /* —— Font color —— */
+  --fc-heading: var(--color-ink);
+  --fc-body: var(--color-ink);
+  --fc-muted: var(--color-muted);
+  --fc-link: var(--color-primary);
+  --fc-label: var(--color-primary);
+  --fc-icon: var(--color-primary);
+  --fc-inverse: var(--color-inverse);
+  --fc-on-primary: #ffffff;
+  --fc-on-secondary: #ffffff;
+  --fc-placeholder: #C6C5C5;
+  --fc-disabled: var(--color-disabled-text);
+  --fc-success: var(--color-success);
+  --fc-warning: var(--color-warning);
+  --fc-danger: var(--color-danger);
+  --fc-error: var(--color-danger);
+
+  /* —— Spacing scale —— */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+  --space-11: 80px;
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --space-xl: var(--space-7);
+  --space-2xl: var(--space-8);
+  --space-3xl: var(--space-9);
+
+  /* Page / layout — keep in sync with --page-max (dashboard .app column) */
+  --layout-max: 1221px;
+  --layout-gutter: var(--space-4);
+  --layout-section-gap: var(--space-8);
+  --layout-card-gap: var(--space-4);
+
+  /* —— Radius scale —— */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+  --radius-control: var(--radius-lg);
+  --radius-card: var(--radius-md);
+  --radius-modal: var(--radius-lg);
+  --radius-pill: var(--radius-full);
+
+  /* —— Shadow scale —— */
+  --shadow-none: none;
+  --shadow-sm: 0 2px 8px rgba(35, 31, 32, 0.06);
+  --shadow-md: 0 8px 24px rgba(35, 31, 32, 0.1);
+  --shadow-lg: 0 16px 40px rgba(35, 31, 32, 0.14);
+  --shadow-focus: 0 0 0 4px var(--color-focus-ring);
+
+  /* —— Icon sizes —— */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --icon-xl: 32px;
+
+  /* —— Motion —— */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: ease;
+  --dur-fast: 0.15s;
+  --dur-normal: 0.2s;
+  --dur-slow: 0.3s;
+
+  /* —— Component metrics —— */
+  --btn-height: 60px;
+  --btn-height-sm: 48px;
+  --btn-pad-x: 24px;
+  --btn-radius: var(--radius-control);
+  --btn-fs: var(--fs-button);
+  --btn-fw: var(--fw-semibold);
+  --btn-gap: var(--space-2);
+  --btn-border-width: 1.5px;
+
+  --input-height: 62px;
+  --input-pad-x: 16px;
+  --input-radius: var(--radius-control);
+  --input-border-width: 1.5px;
+  --input-fs: var(--fs-input);
+  --input-label-fs: var(--fs-label);
+
+  --card-pad: var(--space-5);
+  --card-radius: var(--radius-lg);
+  --card-border: 1px solid var(--color-hairline);
+  --card-shadow: 0 2px 12px rgba(var(--color-ink-rgb), 0.04);
+
+  /* Soft circular glyph wells (cart-line icons, list icons, etc.) */
+  --icon-well-bg: var(--color-paper);
+  --icon-well-border: 0.5px solid var(--color-primary);
+  --icon-well-fg: var(--color-primary);
+
+  /* Inset summary / total strip (cart-card__summary and peers) */
+  --summary-panel-bg: var(--surface-subtle);
+  --summary-panel-divider: 1px solid var(--surface-subtle-divider);
+  --summary-panel-radius: var(--radius-md);
+  --summary-panel-pad: var(--space-3) var(--space-4);
+
+  --modal-pad: var(--space-6);
+  --modal-radius: var(--radius-modal);
+  --modal-max: 480px;
+  --nav-height: 64px;
+  --touch-min: 44px;
+
+  /* —— Centered modal sheet skeleton (width + title bar — shared app-wide) —— */
+  --page-max: 1221px;
+  --sheet-max: min(560px, calc(100vw - 32px));
+  --sheet-radius: var(--radius-modal, var(--radius-xl));
+  --sheet-pad-x: var(--space-5);
+  --sheet-pad-y: var(--space-5);
+  --sheet-pad-bottom: var(--space-5);
+  --sheet-head-gap: 10px;
+  --sheet-badge-size: 40px;
+  --sheet-close-size: 36px;
+  --sheet-bg: var(--surface-card, #fff);
+  --sheet-shadow: var(--shadow-lg, 0 16px 40px rgba(var(--color-ink-rgb), 0.14));
+}
+
+/* Type follows the display (set by js/display-scale.js from screen size).
+   These breakpoints do not use the layout viewport, so docking DevTools
+   does not change headings, body, buttons, or navigation type.
+   Laptop matches the previous 13-inch / HD scale. Meta never below 13px. */
+html[data-display="laptop"],
+html[data-display="tablet"],
+html[data-display="mobile"] {
+  --fs-title: 27px;
+  --fs-body: 19px;
+  --fs-desc: 15px;
+  --fs-meta: 13px;
+  --fs-greet: 50px;
+  --fs-slide-title: 32px;
+  --fs-slide-body: var(--fs-desc);
+}
+
+html[data-display="tablet"] {
+  --fs-greet: 40px;
+  --fs-slide-title: 28px;
+}
+
+html[data-display="mobile"] {
+  --fs-greet: 28px;
+  --fs-slide-title: 22px;
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Send Money</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <link rel="stylesheet" href="css/pages/remittance.css?v=37" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-rates page-remittance">
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+
+
+  <div class="page-titlebar">
+    <a class="page-back" id="remitBack" href="beneficiaries.html" data-i18n-aria="back" aria-label="Back">
+                  <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+                </a>
+    <h1 data-i18n="sendMoney">Send Money</h1>
+  </div>
+
+  <main class="rates-shell">
+    <div class="rates-layout">
+      <section class="rates-inputs" aria-label="Remittance details">
+        <div class="field field--float field--select has-value" id="remitBeneField">
+          <div class="field__control remit-bene-control" id="remitBeneBtn">
+            <span class="remit-bene-text">
+              <span class="field__country" id="remitBeneName">Yeshke Keshke</span>
+              <small class="remit-account" id="remitBeneAccount" hidden></small>
+              <small class="remit-bank" id="remitBeneMeta">State Bank Of India Nariyapuram</small>
+            </span>
+            <a class="remit-change" href="beneficiaries.html" data-i18n="change">Change</a>
+          </div>
+          <span class="field__label" data-i18n="beneficiary">Beneficiary</span>
+        </div>
+
+        <div class="remit-amounts">
+          <label class="field field--float field--amount has-value">
+            <input id="remitLocal" type="text" inputmode="decimal" autocomplete="off" value="10" />
+            <span class="field__label" data-i18n="localAmount">Local Amount</span>
+            <span class="field__ccy">KWD</span>
+          </label>
+
+          <div class="field field--float field--receive has-value" id="remitReceiveField">
+            <div class="field__combo">
+              <input id="remitForeign" type="text" inputmode="decimal" autocomplete="off" value="2960" />
+              <span class="field__ccy-select remit-ccy-static" aria-hidden="true">
+                <span class="field__country" id="remitForeignCcy">INR</span>
+                <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <span class="field__label" data-i18n="foreignAmount">Foreign Amount</span>
+          </div>
+        </div>
+
+        <div class="remit-summary" aria-live="polite">
+          <div class="remit-summary__row">
+            <span data-i18n="youPay">You Pay</span>
+            <strong id="remitYouPay">10.000 KWD</strong>
+          </div>
+          <div class="remit-summary__rule" aria-hidden="true"></div>
+          <div class="remit-summary__row">
+            <span data-i18n="receive">Receive</span>
+            <strong id="remitReceiveLine">2,960 INR</strong>
+          </div>
+        </div>
+
+        <div class="field field--float field--select has-value" id="remitSourceField">
+            <button class="field__control" id="remitSourceBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="remitSourceList">
+            <span class="field__country" id="remitSourceValue">Salary</span>
+            <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="field__label" data-i18n="sourceOfFunds">Source Of Funds</span>
+          <div class="remit-source-panel" id="remitSourceMenu" hidden>
+            <label class="remit-source-search">
+              <svg class="remit-source-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+              <input id="remitSourceSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Search" aria-label="Search" />
+            </label>
+            <ul class="country-menu" id="remitSourceList" role="listbox"></ul>
+          </div>
+        </div>
+
+        <div class="field field--float field--select has-value" id="remitPurposeField">
+          <button class="field__control" id="remitPurposeBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="remitPurposeList">
+            <span class="field__country" id="remitPurposeValue">Family Maintenance/savings</span>
+            <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="field__label" data-i18n="purposeOfTransaction">Purpose Of Transaction</span>
+          <div class="remit-source-panel" id="remitPurposeMenu" hidden>
+            <label class="remit-source-search">
+              <svg class="remit-source-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg>
+              <input id="remitPurposeSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Search" aria-label="Search" />
+            </label>
+            <ul class="country-menu" id="remitPurposeList" role="listbox"></ul>
+          </div>
+        </div>
+
+        <div class="remit-summary remit-fees" aria-live="polite">
+          <div class="remit-summary__row">
+            <span data-i18n="ourTransactionFees">Our Transaction Fees</span>
+            <strong id="remitOurFee">+ 1.000 KWD</strong>
+          </div>
+          <div class="remit-summary__rule" aria-hidden="true"></div>
+          <div class="remit-summary__row">
+            <span data-i18n="netTransactionFees">Net Transaction Fees</span>
+            <strong id="remitNetFee">1.000 KWD</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="rates-options" aria-label="Payout options">
+        <div class="rates-more">
+          <span class="rates-more__badge" aria-hidden="true">
+            <img class="rates-more__badge-icon" src="assets/images/toggleRate.svg" width="22" height="22" alt="" />
+          </span>
+          <span class="rates-more__copy" data-i18n="moreRates">Click for more rates</span>
+          <button class="switch" id="remitMoreRates" type="button" role="switch" aria-checked="false" data-i18n-aria="moreRates" aria-label="Click for more rates"></button>
+        </div>
+        <div class="rate-cards" id="remitRateCards" role="radiogroup" aria-label="Payout options"></div>
+      </section>
+    </div>
+
+    <div class="remit-next-wrap">
+      <button class="btn btn--login rates-share remit-next" id="remitNext" type="button">
+        <span data-i18n="next">Next</span>
+      </button>
+    </div>
+  </main>
+
+  <button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<div class="remit-sheet" id="remitExtraSheet" hidden aria-hidden="true">
+    <div class="remit-sheet__backdrop" data-remit-extra-close></div>
+    <div class="remit-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="remitExtraTitle">
+      <div class="remit-sheet__bar">
+        <h2 id="remitExtraTitle" data-i18n="additionalDetails">Additional Details</h2>
+        <button class="remit-sheet__close" type="button" data-remit-extra-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="remit-sheet__body">
+        <label class="field field--float has-value">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 17H4v2h10v-2zm6-8H4v2h16V9zM4 15h16v-2H4v2zM4 5v2h16V5H4z"/></svg></span>
+          <input id="remitInstruction" type="text" autocomplete="off" value="URGENT" />
+          <span class="field__label" data-i18n="furtherInstruction">Further Instruction</span>
+        </label>
+        <label class="field field--float has-value">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+          <input id="remitPhone" type="tel" inputmode="numeric" autocomplete="tel" value="9638527417" />
+          <span class="field__label" data-i18n="benePhone">Bene Telephone/Mobile Number - without country code</span>
+        </label>
+      </div>
+      <div class="remit-sheet__foot">
+        <button class="btn btn--login rates-share" id="remitExtraNext" type="button">
+          <span data-i18n="next">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rate-info" id="rateInfo" hidden aria-hidden="true">
+    <div class="rate-info__backdrop" data-close-info></div>
+    <aside class="rate-info__panel" role="dialog" aria-modal="true" aria-labelledby="rateInfoLead" id="rateInfoPanel">
+      <header class="modal-head rate-info__head">
+        <span class="modal-head__title"></span>
+        <button type="button" class="modal-head__close" data-close-info aria-label="Close">
+          <img src="assets/images/close.svg" width="24" height="24" alt="" />
+        </button>
+      </header>
+      <img class="rate-info__mark" src="assets/images/ex_rate_info.svg" width="88" height="88" alt="" aria-hidden="true" />
+      <p class="rate-info__lead" id="rateInfoLead"></p>
+      <p class="rate-info__note" id="rateInfoNote"></p>
+      <p class="rate-info__body" id="rateInfoBody"></p>
+      <button type="button" class="btn btn--login rate-info__ok" id="rateInfoOk" data-close-info data-i18n="ok">Ok</button>
+    </aside>
+  </div>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="noNotifications">No new notifications.</p>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=79"></script>
+  <script src="js/data/send-data.js?v=4"></script>
+  <script src="js/pages/remittance.js?v=22"></script>
+</body>
+</html>

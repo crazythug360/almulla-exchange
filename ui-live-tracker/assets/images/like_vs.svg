@@ -1,0 +1,16 @@
+<svg width="29" height="29" viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="55.516%" y1="50.337%" x2="101.966%" y2="98.426%" id="d2ic13h35a">
+            <stop stop-color="#FFD67D" offset="0%"/>
+            <stop stop-color="#8C7216" offset="0%"/>
+            <stop stop-opacity="0" offset="0%"/>
+            <stop stop-color="#8C7216" offset="0%"/>
+            <stop stop-color="#6B4300" offset="94.378%"/>
+            <stop stop-color="#DDA727" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g fill-rule="nonzero" fill="none">
+        <path d="M29 14.5C29 6.492 22.508 0 14.5 0S0 6.492 0 14.5 6.492 29 14.5 29 29 22.508 29 14.5z" fill="url(#d2ic13h35a)"/>
+        <path d="M8.247 12.663H9.29c.262 0 .474.212.474.474v7.39a.473.473 0 0 1-.474.473H8.247A1.248 1.248 0 0 1 7 19.753V13.91c0-.686.562-1.247 1.247-1.247zm11.177-1.658h-3.267v-2.7c0-.836-.41-1.626-1.105-2.084A1.228 1.228 0 0 0 14.325 6c-.536 0-1.042.316-1.247.853l-1.713 5.217a.477.477 0 0 0-.023.148v8.308c0 .262.211.474.473.474h5.936c1.673 0 2.037-.695 2.368-1.705l1.674-5.006c.537-1.61.126-3.284-2.369-3.284z" fill="#FFF"/>
+    </g>
+</svg>

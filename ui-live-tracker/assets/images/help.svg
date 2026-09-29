@@ -1,0 +1,46 @@
+<svg width="75" height="62" viewBox="0 0 75 62" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-7.3%" y="-9.1%" width="114.5%" height="120%" filterUnits="objectBoundingBox" id="ju9bj62qgb">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16873361 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+            <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter2" result="shadowBlurOuter2"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16873361 0" in="shadowBlurOuter2" result="shadowMatrixOuter2"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <circle id="jwtvqje5va" cx="27.5" cy="27.5" r="27.5"/>
+    </defs>
+    <g transform="translate(0 3)" fill="none" fill-rule="evenodd">
+        <g transform="translate(18)">
+            <mask id="yxlgghxwec" fill="#fff">
+                <use xlink:href="#jwtvqje5va"/>
+            </mask>
+            <g fill-rule="nonzero">
+                <use fill="#000" filter="url(#ju9bj62qgb)" xlink:href="#jwtvqje5va"/>
+                <use fill="#FFF" xlink:href="#jwtvqje5va"/>
+            </g>
+            <g mask="url(#yxlgghxwec)" fill-rule="nonzero">
+                <g transform="translate(7 8)">
+                    <path d="M31.949 24.722c-2.276-6.398-.793-13.696-.793-13.696l-11.084 1.526L8.853 11s1.483 7.324-.793 13.696a.982.982 0 0 0 .107.887.94.94 0 0 0 .775.417h22.125a.94.94 0 0 0 .76-.41.982.982 0 0 0 .122-.868z" fill="#1E1E1E"/>
+                    <path d="M20.006 0C13.933-.003 9.006 4.916 9 10.99 8.994 17.063 13.912 21.992 19.985 22 26.06 22.008 30.99 17.092 31 11.019A11 11 0 0 0 20.006 0z" fill="#030303"/>
+                    <path fill="#9F9F9F" d="M25.352 26.574v-4.75L20.346 20h-.012l-5.006 1.824v4.75L13 27.8V33h15v-5.027z"/>
+                    <path d="M25.438 26c-1.481 4.495-8.086 4.97-10.05 0L14 26.726V47h13V26.822L25.438 26z" fill="#EBF0F3"/>
+                    <path d="M14.626 26c0 2.295.27 12.335 4.374 21H0l.975-10.837c.184-2.02 1.364-3.799 3.124-4.712l8.553-4.435L14.626 26zM40 47H21c4.095-8.665 4.376-18.705 4.376-21l1.932 1.003 8.59 4.429c1.76.915 2.94 2.693 3.127 4.711L40 47z" fill="#08BE3E"/>
+                    <path d="M20.5 3C15.806 3 12 7.926 12 14s3.806 11 8.5 11S29 20.074 29 14 25.194 3 20.5 3z" fill="#D3F9D9"/>
+                    <path d="M24.946 21H21v-.677h3.946c.657-.003 1.26-.415 1.562-1.07L28.47 15l.531.305-1.967 4.253C26.636 20.443 25.83 21 24.946 21z" fill="#3A556A"/>
+                    <rect fill="#3A556A" x="19" y="19" width="3" height="2" rx="1"/>
+                    <path d="m28 32.321-1.924 1.735.861 1.728C24.562 45.02 21 47 21 47c3.889-8.47 4.156-18.285 4.156-20.529V26l1.84 1.452L28 32.322zM19 47s-3.807-1.886-6.21-11.11l1.035-1.842L12 32.728l.87-5.276L14.755 26v.472C14.761 28.685 15.017 38.506 19 47z" fill="#39E16A"/>
+                    <path d="M14 4.48s2.931 6.094 15 5.476l-1.676-5.477L22.927 1h-4.193L14 4.48z" fill="#1E1E1E"/>
+                </g>
+            </g>
+        </g>
+        <rect fill="#3B4544" y="10" width="34" height="11" rx="5.5"/>
+        <text font-family="GothamNarrow-Bold, Gotham Narrow" font-size="9" font-style="condensed" font-weight="600" fill="#FFF">
+                    <tspan x="4" y="18">Help ?</tspan>
+                </text>
+    </g>
+</svg>

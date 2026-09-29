@@ -1,0 +1,610 @@
+/* Remittance — type scale aligned with dashboard / Send Money */
+
+.page-remittance {
+  font-size: var(--fs-body);
+  font-family: var(--ff-sans);
+}
+
+.page-remittance .page-titlebar h1 {
+  font-size: calc(var(--fs-title) * 0.9);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  color: var(--fc-heading);
+}
+
+.page-remittance .page-back {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+}
+
+.page-remittance .remit-step[hidden] {
+  display: none !important;
+}
+
+.page-remittance .remit-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+}
+
+.page-remittance .remit-bene-control {
+  cursor: default;
+  align-items: center;
+  min-height: 72px;
+  height: auto;
+  padding-block: var(--space-4);
+  box-shadow: var(--shadow-md);
+}
+
+.page-remittance .remit-bene-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: start;
+}
+
+.page-remittance .remit-bene-control .field__country {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .field__control,
+.page-remittance .field--float input,
+.page-remittance .field__country,
+.page-remittance .field__ccy {
+  font-size: var(--fs-desc);
+}
+
+.page-remittance .field__label {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-regular);
+}
+
+.page-remittance #remitBeneField .field__label,
+.page-remittance #remitBeneField.has-value .field__label,
+.page-remittance #remitBeneField:focus-within .field__label {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .remit-account,
+.page-remittance .remit-bank {
+  margin: 0;
+  padding: 0;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-medium);
+  color: var(--fc-muted);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-remittance .remit-source-panel {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + var(--space-2));
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--color-paper);
+  border: var(--input-border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.page-remittance .remit-source-panel[hidden] {
+  display: none;
+}
+
+.page-remittance .remit-source-panel .country-menu {
+  position: static;
+  top: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.page-remittance .remit-source-search {
+  position: relative;
+  display: block;
+  margin: 0;
+}
+
+.page-remittance .remit-source-search__icon {
+  position: absolute;
+  inset-inline-start: var(--space-3);
+  top: 50%;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  color: var(--color-primary);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.page-remittance .remit-source-search input,
+.page-remittance #remitSourceSearch {
+  width: 100%;
+  height: var(--btn-height-sm);
+  border: var(--input-border-width) solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--surface-input);
+  padding-block: 0;
+  padding-inline: calc(var(--space-3) + var(--icon-md) + var(--space-2)) var(--space-3);
+  font-family: var(--ff-sans);
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-regular);
+  color: var(--fc-body);
+  outline: none;
+}
+
+.page-remittance .remit-source-search input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.page-remittance .remit-source-panel .country-option {
+  height: auto;
+  min-height: var(--touch-min);
+  align-items: flex-start;
+  padding-block: var(--space-3);
+  white-space: normal;
+  border-radius: 0;
+  border-bottom: 1px solid var(--color-hairline, rgba(35, 31, 32, 0.12));
+  font-weight: var(--fw-regular);
+}
+
+.page-remittance .remit-source-panel .country-option span {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.page-remittance .remit-source-panel li:last-child .country-option {
+  border-bottom: 0;
+}
+
+.page-remittance .remit-source-empty {
+  padding: var(--space-3);
+  color: var(--fc-muted);
+  font-size: var(--fs-desc);
+  text-align: center;
+}
+
+.page-remittance .remit-change {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--fc-inverse);
+  text-decoration: none;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .remit-change:hover {
+  background: var(--color-tertiary);
+  color: var(--fc-inverse);
+}
+
+.page-remittance .remit-ccy-static {
+  pointer-events: none;
+  cursor: default;
+}
+
+.page-remittance .remit-summary {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-card, #fff);
+  box-shadow: var(--shadow-md);
+}
+
+.page-remittance .remit-summary.remit-fees {
+  background: var(--surface-card, #fff);
+  box-shadow: var(--shadow-md);
+}
+
+.page-remittance .remit-summary__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-regular);
+  color: var(--fc-body);
+}
+
+.page-remittance .remit-summary__row strong {
+  font-weight: var(--fw-semibold);
+  color: var(--fc-heading);
+}
+
+.page-remittance .remit-summary__rule {
+  height: 0;
+  margin: 10px 0;
+  border: 0;
+  border-top: 1.5px dashed var(--color-line);
+}
+
+.page-remittance .remit-amounts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.page-remittance .remit-amounts .field {
+  margin: 0;
+  min-width: 0;
+}
+
+.page-remittance .remit-amounts .field--receive .field__ccy-select {
+  max-width: none;
+  flex: 0 0 auto;
+  margin-inline-start: auto;
+  padding-inline: 4px var(--space-4);
+  gap: 0;
+  border-inline-start: 0;
+  justify-content: flex-end;
+}
+
+.page-remittance .remit-amounts .field--receive .field__country {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+.page-remittance .remit-amounts .field--receive .field__chevron {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .page-remittance .remit-amounts {
+    grid-template-columns: 1fr;
+  }
+
+  .page-remittance .remit-amounts .field--receive .field__chevron {
+    display: none;
+  }
+
+  .page-remittance .remit-amounts .field--receive .field__ccy-select {
+    max-width: none;
+    padding-inline: 4px var(--space-4);
+  }
+}
+
+.page-remittance.page-rates .rates-shell,
+.page-remittance .rates-shell {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 24px;
+}
+
+.page-remittance .rates-layout {
+  align-items: stretch !important;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.page-remittance .rates-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.page-remittance .rates-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-gap);
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+}
+
+.page-remittance .rates-options .rate-cards {
+  box-sizing: border-box;
+  width: 100%;
+  align-self: stretch;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(52vh, 360px) !important;
+  height: auto;
+  overflow-y: auto;
+  gap: var(--space-3);
+}
+
+.page-remittance .rates-options:has(.switch.is-on) .rate-cards {
+  max-height: min(72vh, 560px) !important;
+}
+
+.page-remittance .remit-next-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-4);
+  padding-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.page-remittance .remit-next-wrap .remit-next {
+  width: min(100%, 420px);
+  margin: 0;
+  align-self: center;
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .rate-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  white-space: normal;
+  gap: 0;
+  background: #f3f1f1;
+  color: var(--fc-body);
+}
+
+.page-remittance .rate-card.is-on {
+  background: #39802f;
+  color: var(--fc-inverse);
+}
+
+.page-remittance .rate-card.is-on:hover {
+  background: #39802f;
+}
+
+.page-remittance .rate-card__grid {
+  flex: 0 0 auto;
+  gap: 8px 10px;
+}
+
+.page-remittance .rate-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 10px;
+  min-height: 28px;
+}
+
+.page-remittance .rate-card .rate-card__info {
+  margin-top: 0;
+  height: 30px;
+  padding: 0 12px;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-semibold);
+  color: #404040;
+  background: none;
+  box-shadow: none;
+  border: 1.5px solid #404040;
+}
+
+.page-remittance .rate-card:not(.is-on) .rate-card__value--accent {
+  color: #FF3131;
+}
+
+.page-remittance .rate-card__name {
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .rate-card__label {
+  font-size: var(--fs-meta);
+}
+
+.page-remittance .rate-card__value {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.page-rates.page-remittance .rate-card .rate-card__info,
+.page-rates.page-remittance .rate-card.is-on .rate-card__info {
+  background: none;
+  box-shadow: none;
+}
+
+.page-remittance .rate-card.is-on .rate-card__info {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.page-remittance .rate-card .rate-card__info-i,
+.page-remittance .rate-card.is-on .rate-card__info-i,
+.page-remittance .rate-card:not(.is-on) .rate-card__info-i {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.page-remittance .rate-card:not(.is-on) .rate-card__info-i {
+  filter: brightness(0) saturate(100%) invert(25%);
+}
+
+.page-remittance .rate-card.is-on .rate-card__info-i {
+  filter: brightness(0) invert(1);
+}
+
+.page-remittance .rate-card__tags {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  min-height: var(--icon-md);
+  min-width: 7.5rem;
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+}
+
+.page-remittance .rate-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.page-remittance .rate-card__tag svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.page-remittance .rate-card__sep {
+  width: 1px;
+  height: var(--icon-md);
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* Additional details sheet */
+.remit-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+}
+
+.remit-sheet[hidden] {
+  display: none !important;
+}
+
+.remit-sheet__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--color-ink-rgb), 0.45);
+}
+
+.remit-sheet__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, var(--sheet-max, 520px));
+  max-height: min(86vh, 720px);
+  margin: 0;
+  padding: var(--sheet-pad-y, 20px) var(--sheet-pad-x, 20px) var(--sheet-pad-bottom, 20px);
+  border-radius: var(--sheet-radius, var(--radius-xl));
+  background: var(--color-paper);
+  box-shadow: var(--sheet-shadow, var(--shadow-lg));
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    opacity var(--dur-slow, 0.3s) var(--ease-out, ease),
+    transform var(--dur-slow, 0.3s) var(--ease-out, ease);
+}
+
+.remit-sheet.is-open .remit-sheet__panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.remit-sheet__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.remit-sheet__bar h2 {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  color: var(--fc-heading);
+}
+
+.remit-sheet__close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-ink);
+  color: var(--fc-inverse);
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.remit-sheet__close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.remit-sheet__body {
+  display: grid;
+  gap: 18px;
+  padding: 8px 0 12px;
+}
+
+.remit-sheet__foot {
+  margin-top: auto;
+}
+
+.remit-sheet__foot .rates-share {
+  width: 100%;
+  height: var(--btn-height);
+  min-height: var(--btn-height);
+  font-size: var(--btn-fs);
+  font-weight: var(--btn-fw);
+  line-height: 1.15;
+}
+
+.page-remittance .remit-sheet .field--float:focus-within .field__label,
+.page-remittance .remit-sheet .field--float.has-value .field__label {
+  background: var(--surface-input);
+}
+
+@media (max-width: 1100px) {
+  .page-remittance .rate-card {
+    flex: 0 0 auto;
+  }
+}

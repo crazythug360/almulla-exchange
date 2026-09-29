@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Order Foreign Currency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <link rel="stylesheet" href="css/pages/fx-order.css?v=17" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard page-fx-order">
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+
+  <div id="ameTopnav"></div>
+  </div>
+<div class="page-titlebar">
+    <a class="page-back" href="dashboard2.html" data-i18n-aria="back" aria-label="Back">
+                  <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+                </a>
+    <h1 data-i18n="orderCurrency">Order Foreign Currency</h1>
+  </div>
+
+  <main class="fx">
+    <div class="fx__layout">
+      <section class="fx__inputs" aria-label="Order Foreign Currency">
+        <form class="fx__form" id="fxForm" novalidate>
+          <div class="field field--float field--select has-value" id="fxCcyField">
+            <button class="field__control" id="fxCcyBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="fxCcyMenu">
+              <img class="field__flag" id="fxCcyFlag" src="https://flagcdn.com/w40/eg.png" width="28" height="20" alt="" />
+              <span class="field__country" id="fxCcyLabel">EGP - Egyptian Pound</span>
+              <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="field__label">Select Currency</span>
+            <ul class="country-menu" id="fxCcyMenu" role="listbox" hidden></ul>
+          </div>
+
+          <label class="field field--float field--amount has-value">
+            <input id="fxAmount" type="text" inputmode="decimal" autocomplete="off" value="100" />
+            <span class="field__label">Enter Amount</span>
+            <span class="field__ccy" id="fxAmountCcy">EGP</span>
+          </label>
+
+          <fieldset class="fx__denom">
+            <legend>Denomination</legend>
+            <label class="fx__radio">
+              <input type="radio" name="denom" value="high" checked />
+              <span>High Value Notes</span>
+            </label>
+            <label class="fx__radio">
+              <input type="radio" name="denom" value="mixed" />
+              <span>Mixed Notes</span>
+            </label>
+          </fieldset>
+
+          <div class="fx__grid">
+            <div class="field field--float field--select has-value" id="fxSourceField">
+              <button class="field__control" id="fxSourceBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="field__country" id="fxSourceValue">Bonus</span>
+                <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <span class="field__label">Source Of Funds</span>
+              <ul class="country-menu" id="fxSourceMenu" role="listbox" hidden></ul>
+            </div>
+            <div class="field field--float field--select has-value" id="fxPurposeField">
+              <button class="field__control" id="fxPurposeBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="field__country" id="fxPurposeValue">Business Travel</span>
+                <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <span class="field__label">Purpose Of Transaction</span>
+              <ul class="country-menu" id="fxPurposeMenu" role="listbox" hidden></ul>
+            </div>
+          </div>
+
+          <div class="field field--float field--select has-value" id="fxCountryField">
+            <button class="field__control" id="fxCountryBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <img class="field__flag" id="fxCountryFlag" src="https://flagcdn.com/w40/eg.png" width="28" height="20" alt="" />
+              <span class="field__country" id="fxCountryValue">Egypt</span>
+              <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="field__label">Country Of Travel</span>
+            <ul class="country-menu" id="fxCountryMenu" role="listbox" hidden></ul>
+          </div>
+
+          <div class="fx__grid">
+            <label class="field field--float field--date has-value">
+              <input id="fxFromDate" type="date" value="2026-09-17" />
+              <span class="field__label">Travel From Date</span>
+              <img class="field__date-icon" src="assets/images/calendar.svg" width="19" height="19" alt="" aria-hidden="true" />
+            </label>
+            <label class="field field--float field--date has-value">
+              <input id="fxToDate" type="date" value="2026-09-27" />
+              <span class="field__label">Travel To Date</span>
+              <img class="field__date-icon" src="assets/images/calendar.svg" width="19" height="19" alt="" aria-hidden="true" />
+            </label>
+          </div>
+        </form>
+      </section>
+
+      <aside class="fx__aside" aria-label="Exchange rates">
+        <div class="fx__rates" id="fxRateCards" aria-live="polite">
+          <div class="fx__rate fx__rate--pair">
+            <span id="fxPairA">EGP - KWD</span>
+            <strong id="fxRateA">0.0075</strong>
+          </div>
+          <div class="fx__rate fx__rate--pair">
+            <span id="fxPairB">KWD - EGP</span>
+            <strong id="fxRateB">133.33</strong>
+          </div>
+          <div class="fx__rate fx__rate--soft">
+            <span data-i18n="youPay">You Pay</span>
+            <strong id="fxYouPay">0.750 KWD</strong>
+          </div>
+          <div class="fx__rate fx__rate--soft">
+            <span data-i18n="receive">Receive</span>
+            <strong id="fxReceive">100.00 EGP</strong>
+          </div>
+        </div>
+        <p class="fx__note">
+          <span class="fx__note-icon" aria-hidden="true">!</span>
+          <span><strong>Note:</strong> Delivery charge will be KD 2.000 for each delivery.</span>
+        </p>
+      </aside>
+    </div>
+
+    <div class="fx__proceed-wrap">
+      <button class="btn btn--login fx__proceed" id="fxProceed" type="submit" form="fxForm">Proceed</button>
+    </div>
+  </main>
+
+  <div id="ameDrawer"></div>
+  <div class="drawer-overlay" id="overlay" hidden></div>
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+  </dialog>
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="noNotifications">No new notifications.</p>
+  </dialog>
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+  <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/pages/fx-order.js?v=1"></script>
+</body>
+</html>

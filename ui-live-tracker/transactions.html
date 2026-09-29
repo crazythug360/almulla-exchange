@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — My Transactions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <link rel="stylesheet" href="css/pages/transactions.css?v=73" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard page-transactions">
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+<div class="app" id="app">
+    <main class="content mtx-page" id="mtxPage">
+      <!-- Step 1: shell = freeze (controls) + body (list only) -->
+      <div class="mtx-shell">
+        <header class="mtx-freeze">
+          <div class="tx-head">
+            <a class="page-back tx-head__back" href="dashboard.html" data-i18n-aria="back" aria-label="Back">
+              <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+            </a>
+            <h1 class="tx-head__title" data-i18n="myTransactions">My Transactions</h1>
+          </div>
+
+          <div class="tx-tabs" role="tablist" aria-label="Transaction views">
+            <button class="tx-tab tx-tab--tx is-on" type="button" role="tab" aria-selected="true" data-tx-tab="transactions">
+              <span data-i18n="txTabTransactions">Transactions</span>
+            </button>
+            <button class="tx-tab tx-tab--orders" type="button" role="tab" aria-selected="false" data-tx-tab="orders">
+              <span data-i18n="txTabOrders">Orders</span>
+            </button>
+          </div>
+
+          <div class="tx-summary-row">
+            <div class="tx-summary">
+              <div class="tx-summary__lead">
+                <div class="tx-summary__copy">
+                  <span class="tx-summary__label" data-i18n="totalTransferred">TOTAL TRANSFERRED</span>
+                  <strong class="tx-summary__amt" id="txTotalAmt">KWD 0.000</strong>
+                </div>
+              </div>
+              <div class="tx-summary__badge" id="txCountBadge" aria-live="polite">
+                <strong>0</strong>
+                <span data-i18n="txns">TXNs</span>
+              </div>
+            </div>
+            <button class="tx-statement" id="txStatementBtn" type="button">
+              <span data-i18n="getStatement">Get Statement</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v10M8 11l4 4 4-4"/><path d="M6 19h12"/></svg>
+            </button>
+          </div>
+
+          <div class="tx-tools">
+            <label class="tx-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="tx-search__slot">
+                <input type="search" id="txSearch" data-i18n-aria="searchByBeneficiary" aria-label="Search by Beneficiary Name" placeholder="" autocomplete="off" />
+                <span class="tx-search-hint" id="txSearchHint" aria-hidden="true">
+                  <span class="tx-search-hint__fixed">Search by</span>
+                  <span class="tx-search-hint__text"></span>
+                  <span class="tx-search-hint__caret"></span>
+                </span>
+              </span>
+            </label>
+            <button class="tx-sort" id="txSortBtn" type="button" aria-label="Sort" data-sort="desc">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h10M9 12h6M11 17h2" stroke-linecap="round"/><path d="M17 7v12M14.5 16.5 17 19l2.5-2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="tx-chips-row">
+            <div class="tx-chips" id="txChips" role="tablist" aria-label="Currency filter">
+              <button class="tx-chip is-on" type="button" role="tab" aria-selected="true" data-tx-ccy="all">
+                <span>All</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="INR">
+                <span>INR</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="LKR">
+                <span>LKR</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="USD">
+                <span>USD</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="PKR">
+                <span>PKR</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="BDT">
+                <span>BDT</span>
+              </button>
+              <button class="tx-chip" type="button" role="tab" aria-selected="false" data-tx-ccy="PHP">
+                <span>PHP</span>
+              </button>
+            </div>
+            <button class="tx-filter-btn" id="txFilterBtn" type="button" aria-expanded="false" aria-controls="txFilterPanel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" stroke-linecap="round"/><circle cx="9" cy="7" r="1.6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.6" fill="currentColor" stroke="none"/></svg>
+              <span data-i18n="filter">Filter</span>
+              <span class="tx-filter-badge" id="txFilterBadge" hidden>0</span>
+            </button>
+          </div>
+
+          <div class="tx-filter-panel" id="txFilterPanel" hidden>
+            <div class="tx-filter-panel__head">
+              <h2 data-i18n="filterBy">Filter by</h2>
+              <button type="button" id="txFilterClear" data-i18n="clear">Clear</button>
+            </div>
+            <div class="tx-filter-grid">
+              <label class="tx-field">
+                <span data-i18n="fromDate">From</span>
+                <input type="date" id="txFrom" />
+              </label>
+              <label class="tx-field">
+                <span data-i18n="toDate">To</span>
+                <input type="date" id="txTo" />
+              </label>
+              <div class="tx-field">
+                <span data-i18n="selectBeneficiary">Select beneficiary</span>
+                <div class="tx-select" id="txBeneSelect">
+                  <button class="tx-select__btn" type="button" id="txBeneBtn" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="txBeneLabel" data-i18n="selectBeneficiary">Select beneficiary</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </button>
+                  <ul class="tx-select__menu" id="txBeneMenu" role="listbox" hidden></ul>
+                </div>
+              </div>
+              <div class="tx-field">
+                <span data-i18n="status">Status</span>
+                <div class="tx-select" id="txStatusSelect">
+                  <button class="tx-select__btn" type="button" id="txStatusBtn" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="txStatusLabel">All</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </button>
+                  <ul class="tx-select__menu" id="txStatusMenu" role="listbox" hidden></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Step 2: only this region scrolls -->
+        <div class="mtx-body" id="txScroll">
+          <div class="tx-list" id="txList"></div>
+          <div class="tx-orders" id="txOrders" hidden>
+            <div class="tx-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 4.5h7.5L19 9v10.5H7V4.5Z"/><path d="M14.5 4.5V9H19"/><path d="M10 13h6M10 16.5h4"/></svg>
+              <p data-i18n="ordersEmpty">No orders yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="tx-stmt" id="txStmt" hidden aria-hidden="true">
+    <div class="tx-stmt__backdrop" id="txStmtBackdrop"></div>
+    <div class="tx-stmt__panel" role="dialog" aria-modal="true" aria-labelledby="txStmtTitle">
+      <div class="tx-stmt__handle" aria-hidden="true"></div>
+
+      <header class="tx-stmt__hero">
+        <span class="tx-stmt__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v10M8 11l4 4 4-4"/><path d="M6 19h12"/><path d="M7 4.5h7.5L19 9v2"/></svg>
+        </span>
+        <div class="tx-stmt__titles">
+          <p class="tx-stmt__eyebrow" data-i18n="getStatement">Get Statement</p>
+          <h2 class="tx-stmt__title" id="txStmtTitle" data-i18n="downloadStatement">Download Statement</h2>
+        </div>
+        <button class="tx-stmt__close" type="button" id="txStmtClose" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8"/></svg>
+        </button>
+      </header>
+
+      <section class="tx-stmt__section">
+        <div class="tx-stmt__section-head">
+          <span class="tx-stmt__step">1</span>
+          <h3 data-i18n="selectBeneficiaries">Select beneficiaries</h3>
+        </div>
+        <div class="tx-select" id="txStmtBeneSelect">
+          <button class="tx-select__btn" type="button" id="txStmtBeneBtn" aria-haspopup="listbox" aria-expanded="false">
+            <span id="txStmtBeneLabel" data-i18n="allBeneficiaries">All beneficiaries</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="tx-select__menu tx-stmt__bene-menu" id="txStmtBeneMenu" role="listbox" hidden>
+            <div class="tx-stmt__benes" id="txStmtBeneList" role="group" aria-label="Beneficiaries"></div>
+          </div>
+        </div>
+        <p class="tx-stmt__bene-hint" data-i18n="selectBeneficiariesHint">Choose All, or select one or more beneficiaries.</p>
+      </section>
+
+      <section class="tx-stmt__section">
+        <div class="tx-stmt__section-head">
+          <span class="tx-stmt__step">2</span>
+          <h3 data-i18n="selectPeriod">Select a period for your statement</h3>
+        </div>
+        <div class="tx-stmt__periods" role="group" aria-label="Statement period">
+          <button class="tx-stmt__period" type="button" data-stmt-period="30">
+            <span class="tx-stmt__period-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M8 14h3"/></svg>
+            </span>
+            <span class="tx-stmt__period-copy">
+              <strong data-i18n="last30Days">Last 30 Days</strong>
+              <small data-i18n="periodMeta30">Past month activity</small>
+            </span>
+            <span class="tx-stmt__period-tag">30d</span>
+            <span class="tx-stmt__period-check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__period" type="button" data-stmt-period="60">
+            <span class="tx-stmt__period-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M8 14h5"/></svg>
+            </span>
+            <span class="tx-stmt__period-copy">
+              <strong data-i18n="last60Days">Last 60 Days</strong>
+              <small data-i18n="periodMeta60">Two months of transfers</small>
+            </span>
+            <span class="tx-stmt__period-tag">60d</span>
+            <span class="tx-stmt__period-check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__period" type="button" data-stmt-period="90">
+            <span class="tx-stmt__period-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/><path d="M8 14h8"/></svg>
+            </span>
+            <span class="tx-stmt__period-copy">
+              <strong data-i18n="last90Days">Last 90 Days</strong>
+              <small data-i18n="periodMeta90">Quarterly overview</small>
+            </span>
+            <span class="tx-stmt__period-tag">90d</span>
+            <span class="tx-stmt__period-check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__period" type="button" data-stmt-period="fy">
+            <span class="tx-stmt__period-icon tx-stmt__period-icon--fy" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3.5 19 6.5v5.2c0 4.2-2.8 7.3-7 8.8-4.2-1.5-7-4.6-7-8.8V6.5L12 3.5Z"/><path d="M9.2 12.2 11 14l3.8-3.8"/></svg>
+            </span>
+            <span class="tx-stmt__period-copy">
+              <strong data-i18n="financialYear">Financial Year</strong>
+              <small data-i18n="periodMetaFy">Current financial year</small>
+            </span>
+            <span class="tx-stmt__period-tag">FY</span>
+            <span class="tx-stmt__period-check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__period tx-stmt__period--custom" type="button" data-stmt-period="custom">
+            <span class="tx-stmt__period-icon tx-stmt__period-icon--custom" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 7h8M8 12h5M8 17h3"/><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M15.5 14.5 18 17l-2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="tx-stmt__period-copy">
+              <strong data-i18n="custom">Custom</strong>
+              <small data-i18n="periodMetaCustom">Pick your own from / to dates</small>
+            </span>
+            <span class="tx-stmt__period-tag" data-i18n="custom">Custom</span>
+            <span class="tx-stmt__period-check" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="tx-stmt__custom" id="txStmtCustom" hidden>
+          <div class="tx-stmt__custom-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+            <span data-i18n="periodCustomRange">Choose date range</span>
+          </div>
+          <div class="tx-stmt__custom-grid">
+            <label class="tx-field">
+              <span data-i18n="fromDate">From</span>
+              <input type="date" id="txStmtFrom" />
+            </label>
+            <label class="tx-field">
+              <span data-i18n="toDate">To</span>
+              <input type="date" id="txStmtTo" />
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="tx-stmt__section">
+        <div class="tx-stmt__section-head">
+          <span class="tx-stmt__step">3</span>
+          <h3 data-i18n="selectFormat">Select format</h3>
+        </div>
+        <div class="tx-stmt__formats" role="group">
+          <button class="tx-stmt__format" type="button" data-stmt-format="excel">
+            <span class="tx-stmt__fmt-icon tx-stmt__fmt-icon--excel" aria-hidden="true">XLS</span>
+            <strong>Excel</strong>
+            <span class="tx-stmt__check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__format" type="button" data-stmt-format="pdf">
+            <span class="tx-stmt__fmt-icon tx-stmt__fmt-icon--pdf" aria-hidden="true">PDF</span>
+            <strong>PDF</strong>
+            <span class="tx-stmt__check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__format" type="button" data-stmt-format="csv">
+            <span class="tx-stmt__fmt-icon tx-stmt__fmt-icon--csv" aria-hidden="true">CSV</span>
+            <strong>CSV</strong>
+            <span class="tx-stmt__check" aria-hidden="true"></span>
+          </button>
+          <button class="tx-stmt__format" type="button" data-stmt-format="email">
+            <span class="tx-stmt__fmt-icon tx-stmt__fmt-icon--email" aria-hidden="true">@</span>
+            <strong>Email</strong>
+            <span class="tx-stmt__check" aria-hidden="true"></span>
+          </button>
+        </div>
+      </section>
+
+      <div class="tx-stmt__foot">
+        <button class="tx-stmt__proceed" type="button" id="txStmtProceed" disabled data-i18n="proceed">Proceed</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="notify-backdrop" id="notifyBackdrop"></div>
+  <aside class="notify-drawer" id="notifyDrawer" aria-hidden="true">
+    <div class="notify-drawer__head">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button class="notify-drawer__close" id="notifyClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </button>
+    </div>
+    <ul class="news-list">
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong>Maintenance Update</strong>
+          <p>Our services will be unavailable on May 30th from 1:00 AM to 3:00 AM.</p>
+          <small>May 24, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong>New Branch Opening</strong>
+          <p>We’re opening a new branch in Salmiya on June 15th</p>
+          <small>May 22, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyTransfer">Your transfer to India was completed.</strong>
+          <small>Today</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong data-i18n="notifyRate">INR rate improved on your saved corridor.</strong>
+          <small>Yesterday</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyReward">Prestige reward points were credited.</strong>
+          <small>May 20, 2025</small>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+<button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+<div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<dialog class="modal" id="branchesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="branchesTitle">Our branches</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="list">
+      <li>Salmiya — Amman Street</li>
+      <li>Kuwait City — Fahad Al Salem</li>
+      <li>Hawally — Beirut Street</li>
+      <li>Fahaheel — Ajial Complex</li>
+      <li>Jahra — Block 3</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="ratesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="ratesTitle">Exchange rates</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <table class="rates">
+      <thead>
+        <tr><th></th><th data-i18n="currency">Currency</th><th data-i18n="oneKwd">1 KWD</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /></td><td>USD</td><td>3.2570</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eu.png" width="22" height="16" alt="" /></td><td>EUR</td><td>3.0124</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/gb.png" width="22" height="16" alt="" /></td><td>GBP</td><td>2.5481</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/in.png" width="22" height="16" alt="" /></td><td>INR</td><td>271.85</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/pk.png" width="22" height="16" alt="" /></td><td>PKR</td><td>907.40</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/bd.png" width="22" height="16" alt="" /></td><td>BDT</td><td>396.12</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ph.png" width="22" height="16" alt="" /></td><td>PHP</td><td>186.55</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eg.png" width="22" height="16" alt="" /></td><td>EGP</td><td>157.80</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/sa.png" width="22" height="16" alt="" /></td><td>SAR</td><td>12.215</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ae.png" width="22" height="16" alt="" /></td><td>AED</td><td>11.968</td></tr>
+      </tbody>
+    </table>
+    <p class="fine" data-i18n="ratesNote">Indicative rates. 1 KWD to each currency. Final rate confirmed at transaction.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="dash-notes">
+      <li data-i18n="notifyTransfer">Your transfer to India was completed.</li>
+      <li data-i18n="notifyRate">INR rate improved on your saved corridor.</li>
+      <li data-i18n="notifyReward">Prestige reward points were credited.</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+
+    <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/data/send-data.js?v=4"></script>
+  <script src="js/pages/transactions.js?v=26"></script>
+</body>
+</html>

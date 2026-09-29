@@ -1,0 +1,431 @@
+/* Master top header — full monitor width, responsive (no fixed max-width)
+   HTML source of truth: partials/topnav.html (loaded by topnav.js)
+   Do not restyle from page CSS — keep post-login chrome identical. */
+
+header.topnav[data-ame-topnav-root],
+.topnav {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  flex-shrink: 0;
+  width: 100vw;
+  max-width: none;
+  min-width: 0;
+  /* Break out of body page padding so the bar spans the monitor */
+  margin-inline-start: calc(-1 * max(var(--page-pad-x), env(safe-area-inset-left, 0px)));
+  margin-inline-end: calc(-1 * max(var(--page-pad-x), env(safe-area-inset-right, 0px)));
+  padding-inline-start: max(10px, env(safe-area-inset-left, 0px));
+  padding-inline-end: max(10px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+  background: var(--color-paper);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--color-hairline) 80%, transparent);
+}
+
+header.topnav[data-ame-topnav-root] .topnav__bar,
+.topnav__bar {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "lead actions";
+  align-items: center;
+  gap: clamp(8px, 1.2vw, var(--space-4));
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  min-height: var(--nav-height, 64px);
+  padding: 4px 0 10px;
+}
+
+header.topnav[data-ame-topnav-root] .page-lead,
+.topnav .page-lead {
+  grid-area: lead;
+  justify-self: start;
+  margin-inline-start: 0;
+  min-width: 0;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions,
+.topnav .page-actions {
+  grid-area: actions;
+  justify-self: end;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .pill,
+.topnav .page-actions .pill {
+  height: 44px;
+  padding: 0 12px 0 10px;
+  gap: 6px;
+  border-radius: var(--btn-radius);
+  border-width: var(--btn-border-width, 1.5px);
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--fc-inverse);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-semibold);
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .pill.is-current,
+.topnav .page-actions .pill.is-current {
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  color: var(--fc-inverse);
+  box-shadow: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .pill:focus-visible,
+.topnav .page-actions .pill:hover,
+.topnav .page-actions .pill:focus-visible {
+  background: var(--color-tertiary);
+  border-color: var(--color-tertiary);
+  color: var(--fc-inverse);
+  filter: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .pill__icon,
+.topnav .page-actions .pill__icon {
+  width: calc(var(--icon-md) * 1.2);
+  height: calc(var(--icon-md) * 1.2);
+  color: var(--color-primary);
+}
+
+/* Flat green icon actions — no circular fill */
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill,
+.topnav .page-actions .header-home.pill,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill,
+.topnav .page-actions .send-cart.pill,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill,
+.topnav .page-actions .header-notify.pill,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill,
+.topnav .page-actions .header-settings.pill,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill,
+.topnav .page-actions .header-logout.pill {
+  width: var(--touch-min);
+  height: var(--touch-min);
+  min-width: var(--touch-min);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  aspect-ratio: auto;
+  background: transparent;
+  color: #00AE42;
+  box-shadow: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill.is-current,
+.topnav .page-actions .header-home.pill.is-current,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill.is-current,
+.topnav .page-actions .send-cart.pill.is-current,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill.is-current,
+.topnav .page-actions .header-notify.pill.is-current,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill.is-current,
+.topnav .page-actions .header-settings.pill.is-current,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill.is-current,
+.topnav .page-actions .header-logout.pill.is-current {
+  background: transparent;
+  border-color: transparent;
+  color: #00AE42;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill:focus-visible,
+.topnav .page-actions .header-home.pill:hover,
+.topnav .page-actions .header-home.pill:focus-visible,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill:focus-visible,
+.topnav .page-actions .send-cart.pill:hover,
+.topnav .page-actions .send-cart.pill:focus-visible,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill:focus-visible,
+.topnav .page-actions .header-notify.pill:hover,
+.topnav .page-actions .header-notify.pill:focus-visible,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill:focus-visible,
+.topnav .page-actions .header-settings.pill:hover,
+.topnav .page-actions .header-settings.pill:focus-visible,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill:hover,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill:focus-visible,
+.topnav .page-actions .header-logout.pill:hover,
+.topnav .page-actions .header-logout.pill:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  color: #00AE42;
+  opacity: 0.85;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-home .pill__icon--home,
+.topnav .page-actions .header-home .pill__icon--home,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart .pill__icon--cart,
+.topnav .page-actions .send-cart .pill__icon--cart,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify .pill__icon--notify,
+.topnav .page-actions .header-notify .pill__icon--notify,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings .pill__icon--settings,
+.topnav .page-actions .header-settings .pill__icon--settings,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout .pill__icon--logout,
+.topnav .page-actions .header-logout .pill__icon--logout {
+  width: calc(var(--icon-md) * 1.2);
+  height: calc(var(--icon-md) * 1.2);
+  max-width: none;
+  object-fit: contain;
+  display: block;
+  filter: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-notify video.pill__icon--notify,
+.topnav .page-actions .header-notify video.pill__icon--notify {
+  width: calc(var(--icon-md) * 1.5);
+  height: calc(var(--icon-md) * 1.5);
+  background: transparent;
+  pointer-events: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill:hover .pill__icon,
+.topnav .page-actions .header-home.pill:hover .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill:hover .pill__icon,
+.topnav .page-actions .send-cart.pill:hover .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill:hover .pill__icon,
+.topnav .page-actions .header-notify.pill:hover .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill:hover .pill__icon,
+.topnav .page-actions .header-settings.pill:hover .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill:hover .pill__icon,
+.topnav .page-actions .header-logout.pill:hover .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill:focus-visible .pill__icon,
+.topnav .page-actions .header-home.pill:focus-visible .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill:focus-visible .pill__icon,
+.topnav .page-actions .send-cart.pill:focus-visible .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill:focus-visible .pill__icon,
+.topnav .page-actions .header-notify.pill:focus-visible .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill:focus-visible .pill__icon,
+.topnav .page-actions .header-settings.pill:focus-visible .pill__icon,
+header.topnav[data-ame-topnav-root] .page-actions .header-logout.pill:focus-visible .pill__icon,
+.topnav .page-actions .header-logout.pill:focus-visible .pill__icon {
+  filter: none;
+  opacity: 0.85;
+}
+
+/* Small demarcation between icon actions */
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill + .pill,
+.topnav .page-actions .header-home.pill + .pill,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill + .pill,
+.topnav .page-actions .send-cart.pill + .pill,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill + .pill,
+.topnav .page-actions .header-notify.pill + .pill,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill + .pill,
+.topnav .page-actions .header-settings.pill + .pill {
+  position: relative;
+  margin-inline-start: var(--space-1);
+  padding-inline-start: var(--space-2);
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .header-home.pill + .pill::before,
+.topnav .page-actions .header-home.pill + .pill::before,
+header.topnav[data-ame-topnav-root] .page-actions .send-cart.pill + .pill::before,
+.topnav .page-actions .send-cart.pill + .pill::before,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify.pill + .pill::before,
+.topnav .page-actions .header-notify.pill + .pill::before,
+header.topnav[data-ame-topnav-root] .page-actions .header-settings.pill + .pill::before,
+.topnav .page-actions .header-settings.pill + .pill::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  width: 1px;
+  height: calc(var(--icon-md) * 1.2);
+  transform: translateY(-50%);
+  background: var(--color-border-soft, var(--color-border));
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+header.topnav[data-ame-topnav-root] .page-actions .send-cart__badge,
+.topnav .page-actions .send-cart__badge,
+header.topnav[data-ame-topnav-root] .page-actions .header-notify__badge,
+.topnav .page-actions .header-notify__badge {
+  min-width: 16px;
+  height: 16px;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-regular);
+  line-height: 16px;
+  color: var(--fc-inverse);
+  background: #1b4521;
+}
+
+/* Icon-only actions; language keeps its label */
+.topnav .page-actions .pill:not(#langBtn) {
+  position: relative;
+  width: 44px;
+  padding: 0;
+  gap: 0;
+  justify-content: center;
+}
+
+.topnav .page-actions .pill:not(#langBtn)::after {
+  content: attr(aria-label);
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  z-index: 30;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--color-ink);
+  color: var(--fc-inverse);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-tight);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-2px);
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.topnav .page-actions .pill:not(#langBtn):hover::after,
+.topnav .page-actions .pill:not(#langBtn):focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Same type scale as Send Money page title (.send-title) */
+.topnav .welcome__copy > .welcome__hello,
+.topnav .welcome__hello,
+.topnav .welcome__hello > span,
+.topnav .welcome__name {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  color: var(--fc-heading);
+}
+
+.topnav .welcome__hello {
+  flex-wrap: wrap;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.topnav .welcome__name {
+  white-space: normal;
+  color: var(--fc-heading);
+}
+
+.topnav .welcome__label,
+.topnav .welcome__hello > .welcome__label {
+  color: var(--color-primary);
+}
+
+.topnav .welcome__last {
+  margin: 2px 0 0;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-thin);
+  line-height: var(--lh-snug);
+  color: var(--fc-muted, var(--color-muted));
+}
+
+.topnav .welcome__last:not([hidden]) {
+  display: block;
+}
+
+/* Pre-login: full wordmark on the left, no Hello greeting.
+   Home, cart, and notifications appear only after login. */
+.topnav.topnav--prelogin .welcome {
+  display: none !important;
+}
+
+.topnav.topnav--prelogin #headerHomeAction,
+.topnav.topnav--prelogin #sendCartBtn,
+.topnav.topnav--prelogin #headerNotifyBtn,
+.topnav.topnav--prelogin #headerLogoutBtn {
+  display: none !important;
+}
+
+.topnav.topnav--prelogin .menu-btn.menu-btn--logo {
+  width: auto;
+  height: auto;
+  min-height: var(--touch-min, 44px);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.topnav.topnav--prelogin .menu-btn.menu-btn--logo:hover,
+.topnav.topnav--prelogin .menu-btn.menu-btn--logo[aria-expanded="true"] {
+  background: transparent;
+}
+
+.topnav.topnav--prelogin .menu-btn__mark.menu-btn__logo {
+  width: auto;
+  height: 48px;
+  max-width: min(280px, 58vw);
+  object-fit: contain;
+}
+
+html[data-theme="dark"] .topnav.topnav--prelogin .menu-btn__logo {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  box-sizing: content-box;
+}
+
+html[dir="rtl"] .topnav__bar {
+  grid-template-areas: "actions lead";
+}
+
+html[dir="rtl"] .topnav .page-lead {
+  justify-self: end;
+}
+
+html[dir="rtl"] .topnav .page-actions {
+  justify-self: start;
+}
+
+@media (max-width: 1512px) {
+  .topnav__bar {
+    padding: 2px 0 8px;
+    gap: clamp(8px, 1vw, var(--space-3));
+  }
+}
+
+@media (max-height: 900px) {
+  .topnav__bar {
+    padding: 2px 0 8px;
+  }
+}
+
+@media (max-height: 820px) {
+  .topnav__bar {
+    padding: 0 0 6px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .topnav__bar {
+    gap: 8px;
+    min-height: 56px;
+  }
+
+  .topnav.topnav--prelogin .menu-btn__mark.menu-btn__logo {
+    height: 40px;
+    max-width: min(220px, 52vw);
+  }
+}
+
+@media (max-width: 520px) {
+  .topnav__bar {
+    gap: 6px;
+  }
+
+  .topnav.topnav--prelogin .menu-btn__mark.menu-btn__logo {
+    height: 36px;
+    max-width: min(180px, 48vw);
+  }
+}

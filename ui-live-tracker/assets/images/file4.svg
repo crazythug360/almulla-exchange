@@ -1,0 +1,23 @@
+<svg width="126" height="134" viewBox="0 0 126 134" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-8.6%" y="-6.9%" width="117.2%" height="122.4%" filterUnits="objectBoundingBox" id="3q6gw71xya">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" in="shadowBlurOuter1" result="shadowMatrixOuter1"/>
+            <feOffset dy="12" in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feColorMatrix values="0 0 0 0 0.859318388 0 0 0 0 0.859318388 0 0 0 0 0.859318388 0 0 0 0.5 0" in="shadowOffsetOuter2" result="shadowMatrixOuter2"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+        <path d="M110.026 40.8H107.3v26.738l-.754-.638c-4.524-3.886-11.832-3.886-16.356 0L66.062 87.606c-4.524 3.886-11.832 3.886-16.356 0l-1.972-1.624c-4.118-3.596-10.672-3.944-15.312-.812L10.73 99.728C9.454 96.48 8.7 92.71 8.7 88.302V39.698C8.7 23.342 17.342 14.7 33.698 14.7H81.2v-2.726c0-2.32.406-4.292 1.334-5.974H33.698C12.586 6 0 18.586 0 39.698v48.604c0 6.322 1.102 11.832 3.248 16.472C8.236 115.794 18.908 122 33.698 122h48.604C103.414 122 116 109.414 116 88.302V39.466c-1.682.928-3.654 1.334-5.974 1.334z" id="kku5pyin0b"/>
+    </defs>
+    <g fill-rule="nonzero" fill="none">
+        <path d="M114.11 0H96.89C89.451 0 85 4.451 85 11.89v17.22C85 36.549 89.451 41 96.89 41h17.22c7.439 0 11.89-4.451 11.89-11.89V11.89C126 4.451 121.549 0 114.11 0zm1.289 19.387a3.634 3.634 0 0 1-2.578 1.054 3.634 3.634 0 0 1-2.577-1.054l-1.054-1.054v13.12c0 2.05-1.64 3.69-3.69 3.69s-3.69-1.64-3.69-3.69v-13.12l-1.054 1.054c-1.406 1.406-3.749 1.406-5.155 0-1.405-1.406-1.405-3.748 0-5.154l7.322-7.322c.293-.292.703-.527 1.113-.702.117-.059.234-.059.351-.118.293-.117.586-.175.937-.175h.352c.41 0 .761.058 1.171.234h.117c.41.176.762.41 1.055.703.058.058.058.058.117.058l7.321 7.322a3.624 3.624 0 0 1-.058 5.154zM45.5 55C53.508 55 60 48.508 60 40.5S53.508 26 45.5 26 31 32.492 31 40.5 37.492 55 45.5 55z" fill="#00AE42"/>
+        <g transform="translate(4)">
+            <use fill="#000" filter="url(#3q6gw71xya)" xlink:href="#kku5pyin0b"/>
+            <use fill="#00AE42" xlink:href="#kku5pyin0b"/>
+        </g>
+    </g>
+</svg>

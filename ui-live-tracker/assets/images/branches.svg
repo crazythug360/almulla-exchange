@@ -1,0 +1,36 @@
+<svg width="36" height="38" viewBox="0 0 36 38" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="snpcndohoc">
+            <stop stop-color="#00B935" offset="0%" />
+            <stop stop-color="#00B935" offset="100%" />
+        </linearGradient>
+        <filter x="-16.7%" y="-20%" width="133.3%" height="140%" filterUnits="objectBoundingBox"
+            id="tccqffgj2a">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter1" result="shadowMatrixOuter1" />
+            <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetOuter2" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter2" result="shadowBlurOuter2" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter2" result="shadowMatrixOuter2" />
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1" />
+                <feMergeNode in="shadowMatrixOuter2" />
+            </feMerge>
+        </filter>
+        <circle id="yyn0ks8zjb" cx="15" cy="15" r="15" />
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(3 4)">
+            <use fill="#00B935" filter="url(#tccqffgj2a)" xlink:href="#yyn0ks8zjb" />
+            <use fill="#FFF" xlink:href="#yyn0ks8zjb" />
+        </g>
+        <path
+            d="M8.5 0C3.813 0 0 3.847 0 8.574c0 1.871.586 3.65 1.696 5.14l6.28 8.534c.016.02.04.028.057.047a.63.63 0 0 0 .99-.047c1.81-2.435 5.124-6.981 6.399-8.696v-.002l.008-.01A8.564 8.564 0 0 0 17 8.573C17 3.847 13.187 0 8.5 0zm0 13.2c-2.523 0-4.586-2.08-4.586-4.626C3.914 6.03 5.977 3.95 8.5 3.95s4.586 2.08 4.586 4.625c0 2.546-2.063 4.626-4.586 4.626z"
+            transform="translate(10 8.159)" fill="url(#snpcndohoc)" fill-rule="nonzero" />
+    </g>
+</svg>

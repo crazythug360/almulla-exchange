@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/signup.css?v=15" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-signup">
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+
+  <main class="su" id="signupApp" data-step="paci">
+    <div class="su__shell">
+      <aside class="su__rail" aria-label="Signup progress">
+        <a class="su__brand" href="index.html">
+          <img src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+        </a>
+        <p class="su__rail-kicker">Create account</p>
+        <h1 class="su__rail-title">Sign up</h1>
+        <p class="su__rail-copy">Kuwait Civil ID registration — web flow without video KYC.</p>
+        <ol class="su__steps" id="suSteps">
+          <li class="su__step is-on" data-step-nav="paci"><span>1</span><em>Mobile ID</em></li>
+          <li class="su__step" data-step-nav="identify"><span>2</span><em>Identity</em></li>
+          <li class="su__step" data-step-nav="personal"><span>3</span><em>Personal</em></li>
+          <li class="su__step" data-step-nav="ekyc"><span>4</span><em>eKYC upload</em></li>
+          <li class="su__step" data-step-nav="credentials"><span>5</span><em>Credentials</em></li>
+          <li class="su__step" data-step-nav="otp"><span>6</span><em>Verify email</em></li>
+          <li class="su__step" data-step-nav="success"><span>7</span><em>Done</em></li>
+        </ol>
+        <a class="su__login-link" href="index.html">Already registered? Login</a>
+      </aside>
+
+      <section class="su__stage">
+        <header class="su__top">
+          <button class="su__back" id="suBack" type="button" aria-label="Back">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <h2 class="su__title" id="suTitle">Kuwait Mobile ID</h2>
+          <button class="su__skip" id="suSkipPaci" type="button">Skip</button>
+        </header>
+
+        <!-- 1. PACI / Mobile ID -->
+        <div class="su__panel is-on" data-panel="paci" id="panelPaci">
+          <div class="su__paci">
+            <div class="su__paci-art" aria-hidden="true">
+              <svg viewBox="0 0 96 96"><rect x="18" y="22" width="52" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="34" width="52" height="36" rx="6" fill="currentColor" opacity="0.12" stroke="currentColor" stroke-width="3"/><path d="m42 50 8 8 16-18" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="su__timer" id="suPaciTimer">--:--</p>
+            <ol class="su__list">
+              <li>You will receive a push notification titled Mobile Civil ID App on your mobile phone.</li>
+              <li>If you have not received a notification, open the Authenticate tab in Kuwait Mobile ID. In that case, skip the next step.</li>
+              <li>Tap the notification to open Kuwait Mobile ID.</li>
+              <li>Open the request named Al Mulla Exchange.</li>
+              <li>Switch ON “I accept to share my details”.</li>
+              <li>Tap Authenticate, enter your Kuwait Mobile ID PIN, then Confirm.</li>
+              <li>Return here to continue registration.</li>
+            </ol>
+            <div class="su__actions">
+              <button class="btn btn--login" id="suPaciContinue" type="button">I’ve authenticated</button>
+              <button class="btn btn--ghost" id="suPaciSkipBtn" type="button">Skip PACI</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Identity + mobile -->
+        <div class="su__panel" data-panel="identify" id="panelIdentify" hidden>
+          <p class="su__hello">Hello</p>
+          <form class="su__form" id="formIdentify" novalidate>
+            <div class="su__grid">
+              <label class="field field--float">
+                <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                <input id="suCivilId" name="civilId" type="text" inputmode="numeric" autocomplete="username" placeholder=" " required maxlength="12" />
+                <span class="field__label">Civil ID</span>
+              </label>
+              <label class="field field--float">
+                <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                <input id="suFullName" name="fullName" type="text" autocomplete="name" placeholder=" " required />
+                <span class="field__label">Enter full name</span>
+              </label>
+            </div>
+            <div class="su__card">
+              <h3 class="su__card-title">Verify mobile</h3>
+              <div class="su__phone">
+                <label class="field field--float su__cc">
+                  <select id="suDial" aria-label="Country code">
+                    <option value="+965" selected>+965</option>
+                    <option value="+971">+971</option>
+                    <option value="+966">+966</option>
+                  </select>
+                  <span class="field__label">Code</span>
+                </label>
+                <label class="field field--float su__phone-grow">
+                  <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                  <input id="suMobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel" placeholder=" " required maxlength="8" />
+                  <span class="field__label">Mobile Number</span>
+                </label>
+              </div>
+              <p class="su__hint">
+                <span class="su__hint-icon" aria-hidden="true">i</span>
+                OTP will be sent for verification
+              </p>
+            </div>
+            <div class="su__actions">
+              <button class="btn btn--login" type="submit">Next</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 3. Personal details -->
+        <div class="su__panel" data-panel="personal" id="panelPersonal" hidden>
+          <form class="su__form" id="formPersonal" novalidate>
+            <div class="su__grid">
+              <label class="field field--float">
+                <select id="suNationality" required>
+                  <option value="INDIAN" selected>INDIAN</option>
+                  <option value="EGYPTIAN">EGYPTIAN</option>
+                  <option value="FILIPINO">FILIPINO</option>
+                  <option value="BANGLADESHI">BANGLADESHI</option>
+                  <option value="OTHER">OTHER</option>
+                </select>
+                <span class="field__label">Nationality</span>
+              </label>
+              <label class="field field--float">
+                <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                <input id="suCivilIdPersonal" type="text" inputmode="numeric" placeholder=" " required maxlength="12" />
+                <span class="field__label">Civil ID</span>
+              </label>
+            </div>
+            <div class="su__grid su__grid--name">
+              <label class="field field--float su__prefix">
+                <select id="suPrefix">
+                  <option value="Mr." selected>Mr.</option>
+                  <option value="Ms.">Ms.</option>
+                  <option value="Mrs.">Mrs.</option>
+                </select>
+                <span class="field__label">Prefix</span>
+              </label>
+              <label class="field field--float">
+                <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                <input id="suFirstName" type="text" autocomplete="given-name" placeholder=" " required />
+                <span class="field__label">First Name</span>
+              </label>
+            </div>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+              <input id="suLastName" type="text" autocomplete="family-name" placeholder=" " required />
+              <span class="field__label">Last Name</span>
+            </label>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+              <input id="suEmail" type="email" autocomplete="email" placeholder=" " />
+              <span class="field__label">Email Id (Optional)</span>
+            </label>
+            <div class="su__phone">
+              <label class="field field--float su__cc">
+                <select id="suWaDial" aria-label="WhatsApp country code">
+                  <option value="+965" selected>+965</option>
+                  <option value="+971">+971</option>
+                  <option value="+966">+966</option>
+                </select>
+                <span class="field__label">Code</span>
+              </label>
+              <label class="field field--float su__phone-grow">
+                <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                <input id="suWhatsapp" type="tel" inputmode="numeric" placeholder=" " maxlength="8" />
+                <span class="field__label">WhatsApp Number (Optional)</span>
+              </label>
+            </div>
+
+            <div class="su__pep">
+              <h3>PEP</h3>
+              <div class="su__pep-opts" role="radiogroup" aria-label="PEP status">
+                <label class="su__check">
+                  <input type="radio" name="pep" value="no" checked />
+                  <span>I am not a PEP</span>
+                </label>
+                <label class="su__check">
+                  <input type="radio" name="pep" value="yes" />
+                  <span>I am a PEP</span>
+                </label>
+              </div>
+              <p class="su__pep-note">Politically Exposed Person (PEP) — any natural person or family member / close associate who is or has been entrusted with a prominent public function in Kuwait or a foreign country, or a high-level management position in an international organization.</p>
+            </div>
+            <div class="su__actions">
+              <button class="btn btn--login" type="submit">Next</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 4. eKYC (no video) -->
+        <div class="su__panel" data-panel="ekyc" id="panelEkyc" hidden>
+          <div class="su__card su__card--muted">
+            <h3 class="su__card-title su__card-title--green">Instructions</h3>
+            <ol class="su__list su__list--compact">
+              <li>Upload clear images of both front and back of your Civil ID.</li>
+              <li>Ensure text and photo are readable and not cropped.</li>
+              <li>Use a well-lit photo — glare and blur may delay verification.</li>
+            </ol>
+          </div>
+          <div class="su__uploads">
+            <label class="su__upload" id="uploadFront">
+              <input type="file" id="suIdFront" accept="image/*" hidden />
+              <span class="su__upload-thumb" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              </span>
+              <span class="su__upload-copy">
+                <strong>Civil ID Front</strong>
+                <small data-status>Tap to upload front image</small>
+              </span>
+              <span class="su__upload-ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8.5 12.2 2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </label>
+            <label class="su__upload" id="uploadBack">
+              <input type="file" id="suIdBack" accept="image/*" hidden />
+              <span class="su__upload-thumb" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 10h10M7 14h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </span>
+              <span class="su__upload-copy">
+                <strong>Civil ID Back</strong>
+                <small data-status>Tap to upload back image</small>
+              </span>
+              <span class="su__upload-ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m8.5 12.2 2.4 2.4 4.6-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+            </label>
+          </div>
+          <div class="su__actions">
+            <button class="btn btn--login" id="suEkycNext" type="button" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- 5. Credentials -->
+        <div class="su__panel" data-panel="credentials" id="panelCredentials" hidden>
+          <form class="su__form" id="formCredentials" novalidate>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/></svg></span>
+              <input id="suReferral" type="text" placeholder=" " />
+              <span class="field__label">Referral Code (Optional)</span>
+            </label>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 12c.83 0 1.5.67 1.5 1.5S9.83 15 9 15s-1.5-.67-1.5-1.5S8.17 12 9 12zm3 6H6v-.75c0-1 2-1.5 3-1.5s3 .5 3 1.5V18zm1-9h-2V4h2v3zm5 7.5h-4V15h4v1.5zm0-3h-4V12h4v1.5z"/></svg></span>
+              <input id="suUserId" type="text" placeholder=" " readonly />
+              <span class="field__label">User ID</span>
+            </label>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              </span>
+              <input id="suPass" type="password" autocomplete="new-password" placeholder=" " required />
+              <span class="field__label">Password</span>
+              <button class="field__eye" type="button" data-eye="suPass" aria-label="Show password">
+                <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+                <svg class="eye-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </button>
+            </label>
+            <label class="field field--float">
+              <span class="field__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+              </span>
+              <input id="suPass2" type="password" autocomplete="new-password" placeholder=" " required />
+              <span class="field__label">Confirm Password</span>
+              <button class="field__eye" type="button" data-eye="suPass2" aria-label="Show password">
+                <svg class="eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>
+                <svg class="eye-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+              </button>
+            </label>
+            <div class="su__hints" id="suPassHints">
+              <h3>Password Hint:</h3>
+              <ul>
+                <li data-rule="len"><i></i>8-15 characters</li>
+                <li data-rule="lower"><i></i>At least one small letter</li>
+                <li data-rule="upper"><i></i>At least one capital letter</li>
+                <li data-rule="num"><i></i>At least one number</li>
+                <li data-rule="special"><i></i>At least one special character (!, @, $, %)</li>
+                <li data-rule="match"><i></i>Password matches confirm password</li>
+              </ul>
+            </div>
+            <div class="su__actions">
+              <button class="btn btn--login" id="suCredNext" type="submit" disabled>Next</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 6. Email OTP -->
+        <div class="su__panel" data-panel="otp" id="panelOtp" hidden>
+          <div class="su__otp-art" aria-hidden="true">
+            <svg viewBox="0 0 88 72"><rect x="8" y="16" width="72" height="44" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="m12 22 32 22 32-22" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+          </div>
+          <p class="su__otp-lead"><strong>Email Address</strong></p>
+          <p class="su__otp-copy">Please type the OTP code sent to <span id="suOtpTarget">your email</span></p>
+          <div class="su__otp" id="suOtpBoxes">
+            <span class="su__otp-tag">MDM</span>
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 1" />
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 2" />
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 3" />
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 4" />
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 5" />
+            <input class="su__otp-cell" type="text" inputmode="numeric" maxlength="1" aria-label="Digit 6" />
+          </div>
+          <div class="su__otp-bar">
+            <span>OTP Expires in: <strong id="suOtpTimer">05:00</strong></span>
+            <button class="su__resend" id="suResend" type="button">Resend OTP</button>
+          </div>
+          <div class="su__actions su__actions--row">
+            <button class="btn btn--login" id="suOtpSubmit" type="button">Submit</button>
+            <button class="btn btn--ghost" id="suOtpCancel" type="button">Cancel</button>
+          </div>
+        </div>
+
+        <!-- 7. Success -->
+        <div class="su__panel su__panel--success" data-panel="success" id="panelSuccess" hidden>
+          <div class="su__success">
+            <img class="su__success-logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+            <h2>Registration Successful !</h2>
+            <p>Thank you for registering with Al Mulla Exchange.</p>
+            <div class="su__actions">
+              <a class="btn btn--login" href="index.html">OK</a>
+              <a class="btn btn--ghost" href="branches.html">Locate Branch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Skip PACI confirm -->
+  <dialog class="su-dialog" id="suSkipDialog">
+    <div class="modal-head su-dialog__bar">
+      <h3 class="modal-head__title">Skip</h3>
+      <button type="button" class="modal-head__close" id="suSkipClose" aria-label="Close">
+        <img src="assets/images/close.svg" width="24" height="24" alt="" />
+      </button>
+    </div>
+    <p>Are you sure you want to skip PACI flow and navigate to Registration Flow?</p>
+    <div class="su-dialog__actions">
+      <button class="btn btn--ghost" type="button" id="suSkipCancel">Cancel</button>
+      <button class="btn btn--login" type="button" id="suSkipOk">Ok</button>
+    </div>
+  </dialog>
+
+  <div id="ameDrawer"></div>
+  <div class="drawer-overlay" id="overlay" hidden></div>
+  <button class="fab-menu" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+
+  <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/pages/signup.js?v=1"></script>
+</body>
+</html>

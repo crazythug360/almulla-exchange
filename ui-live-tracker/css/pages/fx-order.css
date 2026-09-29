@@ -1,0 +1,288 @@
+/* Order Foreign Currency — form left, rate cards right (same --page-max + type as remittance) */
+
+.page-fx-order {
+  font-size: var(--fs-body);
+  font-family: var(--ff-sans);
+}
+
+.page-fx-order .page-titlebar {
+  width: min(100%, var(--page-max));
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: 22px;
+  box-sizing: border-box;
+}
+
+.page-fx-order .page-titlebar h1 {
+  font-size: calc(var(--fs-title) * 0.9);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+  color: var(--fc-heading);
+}
+
+.page-fx-order .page-back {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+}
+
+.fx {
+  flex: 1;
+  min-height: 0;
+  width: min(100%, var(--page-max));
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: 22px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+}
+
+.fx__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "inputs aside";
+  gap: 40px;
+  align-items: start;
+  width: 100%;
+}
+
+.fx__inputs {
+  grid-area: inputs;
+  min-width: 0;
+}
+
+.fx__aside {
+  grid-area: aside;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 16px);
+  position: sticky;
+  top: calc(var(--nav-height, 64px) + var(--space-4, 16px));
+}
+
+.fx__rates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3, 12px);
+}
+
+.fx__form {
+  display: grid;
+  gap: var(--space-4, 16px);
+  padding: var(--card-pad, 20px);
+  border-radius: var(--radius-card, 12px);
+  background: var(--surface-card, #fff);
+  border: 1px solid var(--color-border-soft, #e5e5e5);
+  box-shadow: var(--shadow-sm);
+}
+
+.fx__rate {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4, 16px);
+  border-radius: var(--radius-md, 12px);
+  min-height: 84px;
+}
+
+.fx__rate--pair {
+  background: #1b4521;
+  color: var(--fc-inverse, #fff);
+}
+
+.fx__rate--soft {
+  background: var(--color-paper-2, #f3f7f4);
+  color: var(--fc-heading);
+  border: 1px solid var(--color-border-soft, #e5e5e5);
+}
+
+.fx__rate span {
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-medium);
+  opacity: 0.92;
+}
+
+.fx__rate strong {
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+}
+
+.fx__note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3, 12px);
+  margin: 0;
+  padding: var(--space-4, 16px);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid rgba(139, 105, 20, 0.35);
+  background: var(--color-warning-bg, rgba(139, 105, 20, 0.12));
+  color: var(--color-warning);
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-relaxed);
+}
+
+.fx__note strong {
+  font-weight: var(--fw-semibold);
+}
+
+.fx__note-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-warning);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-semibold);
+}
+
+.page-fx-order .field__control,
+.page-fx-order .field--float input,
+.page-fx-order .field--float select,
+.page-fx-order .field__country,
+.page-fx-order .field__ccy {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-medium);
+}
+
+.page-fx-order .field__label {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-regular);
+}
+
+.fx__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4, 16px);
+}
+
+.fx__denom {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4, 16px);
+}
+
+.fx__denom legend {
+  padding: 0;
+  margin: 0 0 var(--space-2, 8px);
+  width: 100%;
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+  color: var(--fc-heading);
+}
+
+.fx__radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 8px);
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-medium);
+  color: var(--fc-heading);
+  cursor: pointer;
+}
+
+.fx__radio input {
+  accent-color: var(--color-secondary);
+  width: 18px;
+  height: 18px;
+}
+
+.fx__proceed-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--space-5, 24px);
+  padding-bottom: calc(var(--space-4, 16px) + env(safe-area-inset-bottom, 0px));
+  flex-shrink: 0;
+}
+
+.page-fx-order .btn.fx__proceed,
+.page-fx-order .btn.btn--login.fx__proceed {
+  width: min(100%, 420px);
+  height: var(--btn-height);
+  min-height: var(--btn-height);
+  margin: 0;
+  border-radius: var(--btn-radius);
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
+}
+
+.page-fx-order .field--float input[type="date"] {
+  color-scheme: light;
+}
+
+.page-fx-order .field--date input[type="date"] {
+  padding-inline: 16px 48px;
+}
+
+.page-fx-order .field--date input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  inset-inline-end: 0;
+  width: 48px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.page-fx-order .field__date-icon {
+  position: absolute;
+  inset-inline-end: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 19px;
+  height: 19px;
+  pointer-events: none;
+  object-fit: contain;
+  display: block;
+}
+
+html[dir="rtl"] .page-fx-order .field--date input[type="date"] {
+  padding-inline: 48px 16px;
+}
+
+html[dir="rtl"] .fx__layout {
+  grid-template-areas: "aside inputs";
+}
+
+html[data-theme="dark"] .fx__rate--soft,
+html[data-theme="dark"] .fx__form {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+@media (max-width: 900px) {
+  .fx__layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "aside"
+      "inputs";
+    gap: var(--space-4, 16px);
+  }
+
+  .fx__aside {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-fx-order .page-titlebar,
+  .fx {
+    padding-inline: var(--space-4, 16px);
+  }
+
+  .fx__rates,
+  .fx__grid {
+    grid-template-columns: 1fr;
+  }
+}

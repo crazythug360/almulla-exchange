@@ -1,0 +1,36 @@
+<svg width="36" height="38" viewBox="0 0 36 38" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="unomnlk25c">
+            <stop stop-color="#00B935" offset="0%" />
+            <stop stop-color="#00B935" offset="100%" />
+        </linearGradient>
+        <filter x="-16.7%" y="-20%" width="133.3%" height="140%" filterUnits="objectBoundingBox"
+            id="lpsxq8xh9a">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter1" result="shadowMatrixOuter1" />
+            <feOffset dy="-1" in="SourceAlpha" result="shadowOffsetOuter2" />
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter2" result="shadowBlurOuter2" />
+            <feColorMatrix
+                values="0 0 0 0 0.620695153 0 0 0 0 0.610457993 0 0 0 0 0.610457993 0 0 0 0.5 0"
+                in="shadowBlurOuter2" result="shadowMatrixOuter2" />
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1" />
+                <feMergeNode in="shadowMatrixOuter2" />
+            </feMerge>
+        </filter>
+        <circle id="ldqdh5aopb" cx="15" cy="15" r="15" />
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(3 4)">
+            <use fill="#00B935" filter="url(#lpsxq8xh9a)" xlink:href="#ldqdh5aopb" />
+            <use fill="#FFF" xlink:href="#ldqdh5aopb" />
+        </g>
+        <path
+            d="M13.5 10.29H3.6V5.75c0-2.17 1.75-3.934 3.9-3.934s3.9 1.765 3.9 3.934v1.816c0 .501.403.908.9.908s.9-.407.9-.908V5.75C13.2 2.58 10.643 0 7.5 0 4.357 0 1.8 2.58 1.8 5.75v4.54h-.3c-.828 0-1.5.677-1.5 1.513v9.684C0 22.323.672 23 1.5 23h12c.828 0 1.5-.677 1.5-1.513v-9.684c0-.836-.672-1.514-1.5-1.514zm-7.8 5.144c0-1.003.806-1.816 1.8-1.816s1.8.813 1.8 1.816c0 .672-.362 1.258-.9 1.573v2.664H6.6v-2.664c-.538-.315-.9-.9-.9-1.573z"
+            transform="translate(11 7)" fill="url(#unomnlk25c)" fill-rule="nonzero" />
+    </g>
+</svg>

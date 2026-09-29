@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Add Beneficiary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <link rel="stylesheet" href="css/pages/add-beneficiary.css?v=62" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard page-add-bene">
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+
+  <div id="ameTopnav"></div>
+  </div>
+<div class="app" id="app">
+    <main class="content ab-page">
+      <div class="ab-shell">
+        <header class="ab-head">
+          <a class="page-back" id="abBack" href="beneficiaries.html" data-i18n-aria="back" aria-label="Back">
+            <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+          </a>
+          <h1 class="ab-title" id="abTitle" data-i18n="addBeneficiary">Add Beneficiary</h1>
+        </header>
+
+        <!-- Step 1: Country + currency only (full width) -->
+        <section class="ab-panel is-active" data-ab-step="corridor" aria-labelledby="abTitle">
+          <div class="ab-card ab-card--corridor">
+            <div class="ab-corridor-fields">
+              <div class="field field--float field--select has-value" id="abCountryField">
+                <button class="field__control" type="button" id="abCountryBtn" aria-haspopup="listbox">
+                  <img class="field__flag" src="https://flagcdn.com/w40/in.png" width="28" height="20" alt="" />
+                  <span class="field__country">India</span>
+                  <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <span class="field__label" data-i18n="abSelectCountry">Select Country</span>
+              </div>
+              <div class="field field--float field--select has-value" id="abCurrencyField">
+                <button class="field__control" type="button" id="abCurrencyBtn">
+                  <span class="ab-rupee" aria-hidden="true">₹</span>
+                  <span class="field__country">INR — Indian Rupee</span>
+                  <svg class="field__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <span class="field__label" data-i18n="abSelectCurrency">Select Currency</span>
+              </div>
+            </div>
+            <button class="ab-btn ab-btn--primary ab-btn--block" type="button" data-ab-next="channel" data-i18n="continue">Continue</button>
+          </div>
+        </section>
+
+        <!-- Accordion flow after corridor -->
+        <section class="ab-panel" data-ab-step="flow" hidden>
+          <div class="ab-acc" id="abAcc">
+            <div class="ab-acc__item ui-acc__item is-pending" data-ab-acc="corridor">
+              <button class="ab-acc__head" type="button" aria-expanded="false">
+                <span class="ab-acc__titles">
+                  <strong data-i18n="abAccCorridor">Country & Currency of Remittance</strong>
+                  <small id="abAccCorridorSum" class="ab-acc__sum ab-acc__sum--corridor">
+                    <img class="ab-acc__sum-flag" id="abAccCorridorFlag" src="https://flagcdn.com/w40/in.png" width="28" height="20" alt="" />
+                    <span id="abAccCorridorSumText">INDIA - INR</span>
+                  </small>
+                </span>
+                <span class="ab-acc__toggle ui-acc__toggle" aria-hidden="true">
+                  <svg class="ab-acc__plus ui-acc__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>
+                  <svg class="ab-acc__minus ui-acc__minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"/></svg>
+                </span>
+              </button>
+              <div class="ab-acc__body" hidden></div>
+            </div>
+
+            <div class="ab-acc__item ui-acc__item is-pending ab-acc__item--channel" data-ab-acc="channel">
+              <button class="ab-acc__head" type="button" aria-expanded="false">
+                <span class="ab-acc__titles">
+                  <strong data-i18n="abAccChannel">Bene Type and Mode of Transfer</strong>
+                  <small id="abAccChannelSum" data-i18n="abAccChannelSub">Select beneficiary type and transfer method.</small>
+                </span>
+                <span class="ab-acc__toggle ui-acc__toggle" aria-hidden="true">
+                  <svg class="ab-acc__plus ui-acc__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>
+                  <svg class="ab-acc__minus ui-acc__minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"/></svg>
+                </span>
+              </button>
+              <div class="ab-acc__body" hidden>
+                <div class="ab-type">
+                  <h2 class="ab-section-title" data-i18n="abSelectType">Select the type of Beneficiary</h2>
+                  <div class="ab-type__opts" role="group">
+                    <button class="ab-type__opt" type="button" data-ab-type="individual" aria-pressed="false">
+                      <span class="ab-type__icon" aria-hidden="true">
+                        <img src="assets/images/Individual.svg" alt="" width="40" height="40" />
+                      </span>
+                      <span data-i18n="abIndividual">Individual</span>
+                    </button>
+                    <button class="ab-type__opt" type="button" data-ab-type="non-individual" aria-pressed="false">
+                      <span class="ab-type__icon" aria-hidden="true">
+                        <img src="assets/images/Individual-non.svg" alt="" width="40" height="40" />
+                      </span>
+                      <span data-i18n="abNonIndividual">Non-individual</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="ab-channel-block" id="abChannelBlock" hidden>
+                  <h2 class="ab-section-title" data-i18n="abSelectChannel">Select Channel</h2>
+                  <div class="ab-channels" role="listbox" aria-label="Channel">
+                    <button class="ab-channel" type="button" role="option" data-ab-channel="bank" aria-selected="false">
+                      <span class="ab-channel__icon" aria-hidden="true">
+                        <img src="assets/images/bank-transfer.svg" alt="" width="28" height="28" />
+                      </span>
+                      <span class="ab-channel__label" data-i18n="abChannelBank">Bank Account Transfer</span>
+                    </button>
+                    <button class="ab-channel" type="button" role="option" data-ab-channel="cash" aria-selected="false">
+                      <span class="ab-channel__icon" aria-hidden="true">
+                        <img src="assets/images/cash-payout.svg" alt="" width="28" height="28" />
+                      </span>
+                      <span class="ab-channel__label" data-i18n="abChannelCash">Cash Payout</span>
+                    </button>
+                    <button class="ab-channel" type="button" role="option" data-ab-channel="visa" aria-selected="false">
+                      <span class="ab-channel__icon" aria-hidden="true">
+                        <img src="assets/images/Visa.svg" alt="" width="28" height="28" />
+                      </span>
+                      <span class="ab-channel__label" data-i18n="abChannelVisa">Visa Direct</span>
+                    </button>
+                    <button class="ab-channel ab-channel--upi" type="button" role="option" data-ab-channel="upi" aria-selected="false" data-i18n-aria="abChannelUpi" aria-label="UPI Payment">
+                      <span class="ab-channel__icon" aria-hidden="true">
+                        <img src="assets/images/upi-payment.svg" alt="" width="220" height="80" />
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div class="ab-cash-agent-block" id="abCashAgentBlock" hidden>
+                  <h2 class="ab-section-title" data-i18n="abCashAgentTitle">Cash Payout Agent</h2>
+                  <div class="ab-agents" role="listbox" aria-label="Cash Payout Agent">
+                    <button class="ab-agent" type="button" role="option" data-ab-agent="transfast" aria-selected="false">
+                      <span class="ab-agent__mark ab-agent__mark--tf" aria-hidden="true">TF</span>
+                      <span class="ab-agent__label">Transfast</span>
+                    </button>
+                    <button class="ab-agent" type="button" role="option" data-ab-agent="western-union" aria-selected="false">
+                      <span class="ab-agent__mark ab-agent__mark--wu" aria-hidden="true">WU</span>
+                      <span class="ab-agent__label">Western Union</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="ab-acc__item ui-acc__item is-pending" data-ab-acc="visa" hidden>
+              <button class="ab-acc__head" type="button" aria-expanded="false">
+                <span class="ab-acc__titles">
+                  <strong data-i18n="abAccVisa">Visa Debit Card Details</strong>
+                  <small id="abAccVisaSum" data-i18n="abAccVisaSub">Enter and confirm the Visa debit card number.</small>
+                </span>
+                <span class="ab-acc__toggle ui-acc__toggle" aria-hidden="true">
+                  <svg class="ab-acc__plus ui-acc__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>
+                  <svg class="ab-acc__minus ui-acc__minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"/></svg>
+                </span>
+              </button>
+              <div class="ab-acc__body" hidden>
+                <div class="ab-visa-card-block" id="abVisaCardBlock">
+                  <div class="ab-visa-card-cols">
+                    <div class="ab-visa-card-group">
+                      <h2 class="ab-section-title" data-i18n="abVisaCardTitle">Enter Beneficiary Visa Debit Card Number</h2>
+                      <div class="ab-visa-card-row" id="abVisaCardRow" role="group" aria-label="Visa card number">
+                        <input class="ab-visa-card-part" id="abVisaCard1" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Card digits 1-4" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCard2" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Card digits 5-8" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCard3" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Card digits 9-12" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCard4" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Card digits 13-16" />
+                      </div>
+                    </div>
+                    <div class="ab-visa-card-group">
+                      <h2 class="ab-section-title" data-i18n="abVisaCardReTitle">Re-enter Visa Debit Card Number</h2>
+                      <div class="ab-visa-card-row" id="abVisaCardReRow" role="group" aria-label="Re-enter Visa card number">
+                        <input class="ab-visa-card-part" id="abVisaCardRe1" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" aria-label="Re-enter digits 1-4" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCardRe2" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" aria-label="Re-enter digits 5-8" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCardRe3" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" aria-label="Re-enter digits 9-12" />
+                        <span class="ab-visa-card-dash" aria-hidden="true">-</span>
+                        <input class="ab-visa-card-part" id="abVisaCardRe4" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="1234" aria-label="Re-enter digits 13-16" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ab-actions">
+                    <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abVisaCardNext" disabled data-i18n="continue">Continue</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ab-acc__item ui-acc__item is-pending" data-ab-acc="bank" hidden>
+              <button class="ab-acc__head" type="button" aria-expanded="false">
+                <span class="ab-acc__titles">
+                  <strong data-i18n="abAccBank">Bene Bank Details</strong>
+                  <small id="abAccBankSum" data-i18n="abAccBankSub">Enter beneficiary bank information.</small>
+                </span>
+                <span class="ab-acc__toggle ui-acc__toggle" aria-hidden="true">
+                  <svg class="ab-acc__plus ui-acc__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>
+                  <svg class="ab-acc__minus ui-acc__minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"/></svg>
+                </span>
+              </button>
+              <div class="ab-acc__body" hidden>
+                <label class="field field--float" id="abIfscField">
+                  <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/></svg></span>
+                  <input id="abIfsc" type="text" value="" autocomplete="off" placeholder=" " />
+                  <span class="field__label" data-i18n="abIfsc">IFSC / Swift Code</span>
+                </label>
+                <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abSearchIfsc" data-i18n="abSearchIfsc">Search For IFSC/Swift</button>
+                <div class="ab-bank-rest" id="abBankRest" hidden>
+                  <div class="ab-field-row">
+                    <label class="field field--float has-value" id="abBankField">
+                      <select id="abBank">
+                        <option value="">Select bank</option>
+                      </select>
+                      <span class="field__label" data-i18n="abBankName">Please choose Bank Name</span>
+                    </label>
+                    <label class="field field--float has-value" id="abBranchField">
+                      <select id="abBranch">
+                        <option value="">Select branch</option>
+                      </select>
+                      <span class="field__label" data-i18n="abBankBranch">Please choose Bank Branch</span>
+                    </label>
+                  </div>
+                  <div class="ab-field-row ab-field-row--2">
+                    <label class="field field--float" id="abAccountField">
+                      <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v4z"/></svg></span>
+                      <input id="abAccount" type="password" value="" autocomplete="off" placeholder=" " />
+                      <span class="field__label" data-i18n="abAccount">Enter Bank Account Number</span>
+                    </label>
+                    <label class="field field--float" id="abAccountReField">
+                      <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v4z"/></svg></span>
+                      <input id="abAccountRe" type="text" value="" autocomplete="off" placeholder=" " />
+                      <span class="field__label" data-i18n="abAccountRe">Re-enter Bank Account Number</span>
+                    </label>
+                  </div>
+                  <div class="ab-actions">
+                    <button class="ab-btn ab-btn--primary ab-btn--block" type="button" data-ab-acc-next="details" id="abUpdateAccount" disabled data-i18n="abUpdateAccount">Click to update account number details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ab-acc__item ui-acc__item is-pending" data-ab-acc="details" hidden>
+              <button class="ab-acc__head" type="button" aria-expanded="false">
+                <span class="ab-acc__titles">
+                  <strong data-i18n="abAccDetails">Bene Name and Personal Details</strong>
+                  <small id="abAccDetailsSum" data-i18n="abAccDetailsSub">Provide beneficiary's personal information.</small>
+                </span>
+                <span class="ab-acc__toggle ui-acc__toggle" aria-hidden="true">
+                  <svg class="ab-acc__plus ui-acc__plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"/></svg>
+                  <svg class="ab-acc__minus ui-acc__minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"/></svg>
+                </span>
+              </button>
+              <div class="ab-acc__body" hidden>
+                <div class="ab-cash-provider" id="abCashProviderBar" hidden>
+                  <span class="ab-cash-provider__mark" id="abCashProviderMark" aria-hidden="true">WU</span>
+                  <strong id="abCashProviderName">Western Union</strong>
+                </div>
+                <div class="ab-hint ab-hint--info">
+                  <span class="ab-hint__icon" aria-hidden="true">i</span>
+                  <p id="abNameHintText" data-i18n="abNameHint">Please enter the beneficiary's full name in English, exactly as registered on their ID in the beneficiary country.</p>
+                </div>
+                <div class="ab-field-row ab-field-row--2" id="abNameRow">
+                  <label class="field field--float" id="abGivenField">
+                    <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                    <input id="abGiven" type="text" value="" autocomplete="off" placeholder=" " />
+                    <span class="field__label" id="abGivenLabel" data-i18n="abGivenName">Enter Beneficiary Given Names Without Last Name</span>
+                  </label>
+                  <label class="field field--float" id="abLastField">
+                    <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                    <input id="abLast" type="text" value="" autocomplete="off" placeholder=" " />
+                    <span class="field__label" data-i18n="abLastName">Enter Beneficiary Last Name/Surname</span>
+                  </label>
+                </div>
+                <div class="ab-actions" id="abNameActions">
+                  <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abUpdateName" disabled data-i18n="abUpdateName">Click to update name details</button>
+                </div>
+                <div class="ab-details-extra" id="abDetailsExtra" hidden>
+                  <div class="ab-field-row ab-field-row--2">
+                    <label class="field field--float field--select">
+                      <select id="abNationality">
+                        <option value="" selected disabled hidden></option>
+                        <option value="Indian">Indian</option>
+                        <option value="Kuwaiti">Kuwaiti</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <span class="field__label" data-i18n="abNationality">Select Beneficiary Nationality (Optional)</span>
+                    </label>
+                    <label class="field field--float field--select">
+                      <select id="abRelationship">
+                        <option value="" selected disabled hidden></option>
+                        <option value="Brother">Brother</option>
+                        <option value="Sister">Sister</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Spouse">Spouse</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Other">Others</option>
+                      </select>
+                      <span class="field__label" data-i18n="abRelationship">Select Beneficiary Relationship</span>
+                    </label>
+                  </div>
+                  <div class="ab-field-row ab-field-row--mobile">
+                    <label class="field field--float has-value ab-field--prefix">
+                      <select id="abPrefix">
+                        <option>+91</option>
+                        <option>+965</option>
+                      </select>
+                      <span class="field__label" data-i18n="abMobilePrefix">Mobile Prefix</span>
+                    </label>
+                    <label class="field field--float">
+                      <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                      <input id="abMobile" type="tel" value="" autocomplete="off" placeholder=" " />
+                      <span class="field__label" data-i18n="abMobile">Enter Beneficiary Mobile Number</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="ab-flow-footer" id="abFlowFooter">
+            <button class="ab-btn ab-btn--outline" type="button" id="abFooterCancel" data-i18n="cancel">Cancel</button>
+            <button class="ab-btn ab-btn--primary" type="button" id="abFooterSubmit" disabled data-i18n="submit">Submit</button>
+          </footer>
+        </section>
+
+        <!-- Overview before OTP (review details, then Submit starts OTP) -->
+        <section class="ab-panel" data-ab-step="overview" hidden>
+          <div class="ab-overview">
+            <div class="ab-overview__toolbar">
+              <p class="ab-overview__hint" data-i18n="abOverviewNote">Please review all the details before submitting. Tap the edit icon to go back and change them.</p>
+              <button class="ab-edit" type="button" id="abEditOverview" data-i18n-aria="abEditSection" aria-label="Edit details">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"/></svg>
+              </button>
+            </div>
+
+            <div class="ab-overview__section" id="abOvBankSection">
+              <div class="ab-overview__section-head">
+                <h2 class="ab-overview__section-title" data-i18n="abBankDetails">Beneficiary Bank Details</h2>
+              </div>
+              <dl class="ab-list" id="abOverviewList">
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 5l9 5.5"/><path d="M5 10.5V19h14v-8.5M3 19h18"/><path d="M9 14h6"/></svg>
+                  </span>
+                  <dt data-i18n="abBank">Bank</dt>
+                  <dd id="abOvBank">—</dd>
+                </div>
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 12h5M8 15h6"/></svg>
+                  </span>
+                  <dt data-i18n="abIfscLabel">IFSC/SWIFT CODE</dt>
+                  <dd id="abOvIfsc">—</dd>
+                </div>
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M3.5 10.5h17M7 15h4"/></svg>
+                  </span>
+                  <dt data-i18n="abAccountLabel">Account Number</dt>
+                  <dd id="abOvAccount">—</dd>
+                </div>
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.2 6.5-10.2A6.5 6.5 0 0 0 5.5 10.8C5.5 15.8 12 21 12 21Z"/><circle cx="12" cy="10.8" r="2.2"/></svg>
+                  </span>
+                  <dt data-i18n="abBranchLabel">Branch</dt>
+                  <dd id="abOvBranch">—</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="ab-overview__section" id="abOvCashSection" hidden>
+              <div class="ab-overview__section-head">
+                <h2 class="ab-overview__section-title" data-i18n="abProviderDetails">Beneficiary Service Provider Details</h2>
+              </div>
+              <div class="ab-overview__provider">
+                <span class="ab-overview__provider-mark" id="abOvProviderMark" aria-hidden="true">WU</span>
+                <strong id="abOvProviderName">WESTERN UNION</strong>
+              </div>
+            </div>
+
+            <div class="ab-overview__section">
+              <div class="ab-overview__section-head">
+                <h2 class="ab-overview__section-title" data-i18n="abBeneDetails">Beneficiary Details</h2>
+              </div>
+              <dl class="ab-list">
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19.2c1.2-3.2 3.6-4.8 6.5-4.8s5.3 1.6 6.5 4.8"/></svg>
+                  </span>
+                  <dt data-i18n="abBeneName">Beneficiary Name</dt>
+                  <dd id="abOvName">—</dd>
+                </div>
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="2.6"/><circle cx="16" cy="10.2" r="2.2"/><path d="M3.8 18.5c.9-2.6 2.7-3.9 5.2-3.9 1.2 0 2.2.3 3 .8"/><path d="M12.8 18.5c.7-2 2.1-3 4-3 2.2 0 3.6 1.2 4.2 3"/></svg>
+                  </span>
+                  <dt data-i18n="abBeneType">Beneficiary Type</dt>
+                  <dd id="abOvType">—</dd>
+                </div>
+                <div class="ab-list__row">
+                  <span class="ab-list__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 4.8h3.1l1.2 3.2-1.9 1.1a11 11 0 0 0 5.3 5.3l1.1-1.9 3.2 1.2v3.1c0 .8-.7 1.5-1.5 1.5C10.4 18.3 5.7 13.6 5.7 7.3c0-.8.7-1.5 1.5-1.5Z"/></svg>
+                  </span>
+                  <dt data-i18n="mobileNumber">Mobile Number</dt>
+                  <dd id="abOvMobile">—</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="ab-overview__actions">
+              <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abOverviewSubmit" data-i18n="submit">Submit</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Thank You -->
+        <section class="ab-panel" data-ab-step="thanks" hidden>
+          <div class="ab-thanks" role="status">
+            <div class="ab-thanks__timer" id="abThanksTimer" hidden>
+              <div class="ab-thanks__ring" aria-hidden="true">
+                <svg viewBox="0 0 120 120" width="160" height="160">
+                  <circle cx="60" cy="60" r="54" fill="none" stroke="rgba(0,174,66,0.2)" stroke-width="8"/>
+                  <circle id="abThanksArc" cx="60" cy="60" r="54" fill="none" stroke="var(--color-primary)" stroke-width="8" stroke-linecap="round" stroke-dasharray="339.292" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+                </svg>
+                <strong id="abThanksClock">01:00</strong>
+              </div>
+              <p class="ab-thanks__wait" data-i18n="abCashWaitTitle">Please wait for a while ...</p>
+            </div>
+            <span class="ab-thanks__check" aria-hidden="true">
+              <svg viewBox="0 0 80 80" width="80" height="80">
+                <circle cx="40" cy="40" r="36" fill="none" stroke="currentColor" stroke-width="4"/>
+                <path d="M24 41l11 11 22-24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <p class="ab-thanks__copy" id="abThanksCopy" data-i18n="abThankYouDesc">Your new beneficiary has been successfully created. You can remit money to this beneficiary after 1 minute(s). For safety reasons, there is a limit of KWD 30,000 for your first bank account transfer to this beneficiary. Once the amount is credited, the limit will be removed and you can remit upto KWD 10,000.</p>
+            <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abThanksOk" data-i18n="ok" disabled>Ok</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Search Branch bottom sheet -->
+  <div class="ab-sheet" id="abBranchSheet" hidden aria-hidden="true">
+    <div class="ab-sheet__backdrop" data-ab-sheet-close></div>
+    <div class="ab-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="abBranchSheetTitle">
+      <header class="ui-sheet__head">
+        <span class="ui-sheet__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16.2 16.2 3.3 3.3"/><path d="M11 8.2v5.6M8.2 11h5.6"/></svg>
+        </span>
+        <div class="ui-sheet__titles">
+          <h2 class="ui-sheet__title" id="abBranchSheetTitle" data-i18n="abSearchBranchTitle">Search Branch</h2>
+          <p class="ui-sheet__lead" data-i18n="abSearchBranchLead">Select bank and branch to continue.</p>
+        </div>
+        <button class="ui-sheet__close" type="button" data-ab-sheet-close data-i18n-aria="cancel" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8"/></svg>
+        </button>
+      </header>
+
+      <div class="ab-sheet-fields">
+        <div class="field field--float field--select" id="abSheetBankField">
+          <input id="abSheetBankValue" type="text" readonly placeholder=" " value="" autocomplete="off" aria-haspopup="listbox" aria-expanded="false" />
+          <span class="field__label" data-i18n="abSheetBank">Bank</span>
+          <div class="ab-sheet-menu" id="abSheetBankMenu" role="listbox" hidden></div>
+        </div>
+
+        <div class="field ab-branch-search" id="abSheetBranchField">
+          <div class="ab-branch-search__box">
+            <span class="ab-branch-search__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16.2 16.2 3.3 3.3"/></svg>
+            </span>
+            <input
+              id="abSheetBranchQuery"
+              class="ab-branch-search__input"
+              type="search"
+              placeholder="Please enter at least 3 characters to search branch"
+              data-i18n-placeholder="abBranchSearchHint"
+              value=""
+              autocomplete="off"
+              disabled
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-label="Search branch"
+            />
+          </div>
+          <div class="ab-sheet-menu" id="abSheetBranchMenu" role="listbox" hidden></div>
+        </div>
+      </div>
+
+      <button class="ab-btn ab-btn--outline ab-btn--block" type="button" data-ab-sheet-close data-i18n="cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- OTP destination + verify (same split layout as cart/login OTP flow) -->
+  <div class="ab-sheet ab-sheet--otp-flow" id="abOtpSheet" hidden aria-hidden="true" data-ab-otp-stage="dest">
+    <div class="ab-sheet__backdrop" data-ab-otp-close></div>
+    <div class="ab-sheet__panel ab-otp-flow__panel" role="dialog" aria-modal="true" aria-labelledby="abOtpSheetTitle">
+      <header class="ab-otp-flow__head ui-sheet__head">
+        <span class="ab-otp-flow__badge ui-sheet__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10.2V7.8A4 4 0 0 1 12 3.8 4 4 0 0 1 16 7.8v2.4"/><rect x="5.5" y="10.2" width="13" height="10" rx="2.2"/><path d="m10.2 15 1.4 1.4 2.6-2.8"/></svg>
+        </span>
+        <div class="ab-otp-flow__titles ui-sheet__titles">
+          <h2 class="ab-otp-flow__title ui-sheet__title" id="abOtpSheetTitle" data-i18n="abOtpDestTitle">Select Destination of OTP to be sent</h2>
+          <p class="ab-otp-flow__lead ui-sheet__lead" id="abOtpSheetLead" data-i18n="payDestLead">Choose where we should send the one-time password.</p>
+        </div>
+        <button class="ab-otp-flow__close ui-sheet__close" type="button" data-ab-otp-close data-i18n-aria="cancel" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 8l8 8M16 8l-8 8"/></svg>
+        </button>
+      </header>
+
+      <div class="ab-otp-flow__stages">
+        <div class="ab-otp-flow__stage is-active" id="abOtpStageDest" data-ab-otp-stage-panel="dest">
+          <div class="ab-otp-dest-layout">
+            <div class="ab-otp-dest-layout__main">
+              <div class="channels ab-otp-dest-layout__channels" role="radiogroup" aria-labelledby="abOtpSheetTitle">
+                <button class="channel" type="button" role="radio" aria-checked="false" data-ab-otp-dest="mobile">
+                  <span class="channel__radio"></span>
+                  <span class="channel__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="18.2" r="0.9" fill="currentColor"/></svg>
+                  </span>
+                  <span class="channel__copy">
+                    <strong data-i18n="mobileNumber">Mobile Number</strong>
+                    <span class="channel__value">965****8886</span>
+                    <em><i class="channel__ok" aria-hidden="true"></i><span data-i18n="verified">Verified</span></em>
+                  </span>
+                </button>
+                <p class="or" data-i18n="or">Or</p>
+                <button class="channel" type="button" role="radio" aria-checked="false" data-ab-otp-dest="whatsapp">
+                  <span class="channel__radio"></span>
+                  <span class="channel__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 3.5a8.2 8.2 0 0 0-7 12.5L4 20.5l4.7-1.2A8.2 8.2 0 1 0 12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.2 9.4c.2-.5.4-.5.7-.5h.6c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.2.6l-.5.4a6 6 0 0 0 2.6 2.6l.4-.5c.2-.2.4-.3.6-.2l1.7.7c.3.1.4.3.4.5v.6c0 .3 0 .5-.5.7A7 7 0 0 1 9.2 9.4Z" fill="currentColor"/></svg>
+                  </span>
+                  <span class="channel__copy">
+                    <strong data-i18n="whatsappNumber">WhatsApp Number</strong>
+                    <span class="channel__value">965****8886</span>
+                    <em><i class="channel__ok" aria-hidden="true"></i><span data-i18n="verified">Verified</span></em>
+                  </span>
+                </button>
+                <p class="or" data-i18n="or">Or</p>
+                <button class="channel" type="button" role="radio" aria-checked="false" data-ab-otp-dest="email">
+                  <span class="channel__radio"></span>
+                  <span class="channel__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
+                  </span>
+                  <span class="channel__copy">
+                    <strong data-i18n="emailAddress">Email Address</strong>
+                    <span class="channel__value">*****an87@gmail.com</span>
+                    <em><i class="channel__ok" aria-hidden="true"></i><span data-i18n="verified">Verified</span></em>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <aside class="ab-otp-dest-layout__art" aria-hidden="true">
+              <img class="ab-otp-dest-layout__art-img" src="assets/images/otp/destination.png" alt="" width="520" height="520" />
+            </aside>
+            <div class="ab-otp-sheet-actions ab-otp-dest-layout__actions">
+              <button class="btn btn--login" type="button" data-ab-otp-close>
+                <span data-i18n="back">Back</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="ab-otp-flow__stage" id="abOtpStageVerify" data-ab-otp-stage-panel="verify" hidden>
+          <form class="ab-otp-verify-layout ab-otp-verify-form" id="abOtpForm" novalidate>
+            <div class="ab-otp-verify-layout__main">
+              <div class="otp-note">
+                <span class="otp-note__icon" id="abOtpNoteIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="18.2" r="0.9" fill="currentColor"/></svg>
+                </span>
+                <div>
+                  <strong id="abOtpChannelLabel" data-i18n="mobileNumber">Mobile Number</strong>
+                  <p><span data-i18n="otpSentTo">Please type the OTP code sent to</span> <b class="accent" id="abOtpMask">965****8886</b></p>
+                </div>
+              </div>
+              <div class="otp" id="abOtpInputs">
+                <input inputmode="numeric" maxlength="1" size="1" autocomplete="one-time-code" aria-label="Digit 1" />
+                <input inputmode="numeric" maxlength="1" size="1" aria-label="Digit 2" />
+                <input inputmode="numeric" maxlength="1" size="1" aria-label="Digit 3" />
+                <input inputmode="numeric" maxlength="1" size="1" aria-label="Digit 4" />
+                <input inputmode="numeric" maxlength="1" size="1" aria-label="Digit 5" />
+                <input inputmode="numeric" maxlength="1" size="1" aria-label="Digit 6" />
+              </div>
+              <input id="abOtpSingle" type="hidden" value="" />
+              <div class="timer">
+                <span class="timer__label">
+                  <span data-i18n="otpExpires">OTP Expires in -</span>
+                  <b id="abOtpClock">4:00</b>
+                  <span class="sandclock" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M7 3.6h10v.8c0 2.6-2.4 4.4-5 6.6-2.6-2.2-5-4-5-6.6v-.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path d="M7 20.4h10v-.8c0-2.6-2.4-4.4-5-6.6-2.6 2.2-5 4-5 6.6v.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                      <path class="sandclock__sand" d="M9.2 5.2h5.6L12 9.2 9.2 5.2Z"/>
+                    </svg>
+                  </span>
+                </span>
+                <button class="timer__resend" id="abOtpResend" type="button" data-i18n="resendOtp" disabled>Resend OTP</button>
+              </div>
+            </div>
+            <aside class="ab-otp-verify-layout__art" aria-hidden="true">
+              <img class="ab-otp-verify-layout__art-img" id="abOtpArtImg" src="assets/images/otp/mobile.png" alt="" width="520" height="520" />
+            </aside>
+            <div class="ab-otp-sheet-actions ab-otp-verify-actions">
+              <button class="btn btn--ghost" id="abOtpBack" type="button">
+                <span data-i18n="back">Back</span>
+              </button>
+              <button class="btn btn--login" id="abOtpSubmit" type="submit" disabled>
+                <span data-i18n="submit">Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cash payout — Additional Details (step 1) -->
+  <div class="ab-sheet ui-sheet" id="abCashExtraSheet" hidden aria-hidden="true">
+    <div class="ab-sheet__backdrop ui-sheet__backdrop" data-ab-cash-extra-close></div>
+    <div class="ab-sheet__panel ui-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="abCashExtraTitle">
+      <header class="ui-sheet__head">
+        <span class="ui-sheet__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c1.2-3.1 3.5-4.6 6.5-4.6s5.3 1.5 6.5 4.6"/></svg>
+        </span>
+        <div class="ui-sheet__titles">
+          <h2 class="ui-sheet__title" id="abCashExtraTitle" data-i18n="abAdditionalDetails">Additional Details</h2>
+          <p class="ui-sheet__lead" data-i18n="abAdditionalDetailsLead">Provide occupation and contact details for cash payout.</p>
+        </div>
+        <button class="ui-sheet__close" type="button" data-ab-cash-extra-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </header>
+      <div class="ab-sheet-fields">
+        <label class="field field--float field--select">
+          <select id="abOccupation">
+            <option value="" selected disabled hidden></option>
+            <option value="Teacher Educator">Teacher Educator</option>
+            <option value="Engineer">Engineer</option>
+            <option value="Business">Business</option>
+            <option value="Student">Student</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="field__label" data-i18n="abOccupation">Occupation</span>
+        </label>
+        <label class="field field--float field--select">
+          <select id="abPositionLevel">
+            <option value="" selected disabled hidden></option>
+            <option value="Senior Level Executive">Senior Level Executive</option>
+            <option value="Mid Level">Mid Level</option>
+            <option value="Junior Level">Junior Level</option>
+            <option value="Entry Level">Entry Level</option>
+          </select>
+          <span class="field__label" data-i18n="abPositionLevel">Position Level</span>
+        </label>
+        <label class="field field--float">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 17H4v2h10v-2zm6-8H4v2h16V9zM4 15h16v-2H4v2zM4 5v2h16V5H4z"/></svg></span>
+          <input id="abFurtherInstruction" type="text" value="" autocomplete="off" placeholder=" " />
+          <span class="field__label" data-i18n="abFurtherInstruction">Further Instruction</span>
+        </label>
+        <label class="field field--float">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+          <input id="abBenePhone" type="tel" value="" autocomplete="off" placeholder=" " />
+          <span class="field__label" data-i18n="abBenePhone">Bene Telephone/Mobile Number - without country code</span>
+        </label>
+        <p class="ab-cash-extra-hint">
+          <span aria-hidden="true">ⓘ</span>
+          <span data-i18n="abBenePhoneHint">Please recheck beneficiary mobile number</span>
+        </p>
+      </div>
+      <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abCashExtraNext" data-i18n="next">Next</button>
+    </div>
+  </div>
+
+  <!-- Cash payout — Additional Details (step 2: promo / message) -->
+  <div class="ab-sheet ui-sheet" id="abCashPromoSheet" hidden aria-hidden="true">
+    <div class="ab-sheet__backdrop ui-sheet__backdrop" data-ab-cash-promo-close></div>
+    <div class="ab-sheet__panel ui-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="abCashPromoTitle">
+      <header class="ui-sheet__head">
+        <span class="ui-sheet__badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v10H4V7Z"/><path d="m4 7 8 6 8-6"/></svg>
+        </span>
+        <div class="ui-sheet__titles">
+          <h2 class="ui-sheet__title" id="abCashPromoTitle" data-i18n="abAdditionalDetails">Additional Details</h2>
+          <p class="ui-sheet__lead" data-i18n="abPromoLead">Optional promotion code and message for the payout.</p>
+        </div>
+        <button class="ui-sheet__close" type="button" data-ab-cash-promo-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </header>
+      <div class="ab-sheet-fields">
+        <label class="field field--float">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></span>
+          <input id="abPromoCode" type="text" value="" autocomplete="off" placeholder=" " />
+          <span class="field__label" data-i18n="abPromoCode">Promotion Code (Optional)</span>
+        </label>
+        <label class="field field--float">
+          <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></span>
+          <input id="abCashMessage" type="text" value="" autocomplete="off" placeholder=" " />
+          <span class="field__label" data-i18n="abCashMessage">Message (Charges Applicable) (Optional)</span>
+        </label>
+      </div>
+      <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abCashPromoNext" data-i18n="next">Next</button>
+    </div>
+  </div>
+
+  <!-- UPI Payment — Add UPI ID -->
+  <div class="ab-sheet ui-sheet" id="abUpiSheet" hidden aria-hidden="true">
+    <div class="ab-sheet__backdrop ui-sheet__backdrop" data-ab-upi-close></div>
+    <div class="ab-sheet__panel ui-sheet__panel ab-upi-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="abUpiTitle">
+      <header class="ab-upi-sheet__head">
+        <h2 class="ab-upi-sheet__title" id="abUpiTitle" data-i18n="abAddUpiId">Add UPI ID</h2>
+        <button class="ab-upi-sheet__close" type="button" data-ab-upi-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </header>
+      <div class="ab-upi-sheet__intro">
+        <p class="ab-upi-sheet__lead" data-i18n="abUpiLead">Enter UPI ID / Virtual Payment Address</p>
+        <span class="ab-upi-sheet__logo" aria-hidden="true" title="UPI">
+          <svg viewBox="0 0 72 28" width="72" height="28" role="img">
+            <path d="M6 22 18 4h8L14 22H6Z" fill="#097939"/>
+            <path d="M14 22 26 4h8L22 22h-8Z" fill="#ED752E"/>
+            <text x="38" y="19" font-family="var(--ff-sans), sans-serif" font-size="14" font-weight="600" fill="#1a1a1a">UPI</text>
+          </svg>
+        </span>
+      </div>
+      <label class="field field--float" id="abUpiField">
+        <span class="field__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57V12c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57V12c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg></span>
+        <input id="abUpiId" type="text" value="" autocomplete="off" placeholder=" " inputmode="email" spellcheck="false" />
+        <span class="field__label" data-i18n="abUpiId">Enter UPI ID</span>
+      </label>
+      <div class="ab-upi-handles" role="group" aria-label="UPI handles">
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@sbi">@sbi</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@okhdfcbank">@okhdfcbank</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@icici">@icici</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@axl">@axl</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@ybl">@ybl</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@paytm">@paytm</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@ibl">@ibl</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@kotak">@kotak</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@indus">@indus</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@sib">@sib</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@uboi">@uboi</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@iob">@iob</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@cr">@cr</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@oksbi">@oksbi</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@okaxis">@okaxis</button>
+        <button class="ab-upi-handle" type="button" data-ab-upi-handle="@upi">@upi</button>
+      </div>
+      <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abUpiVerify" disabled data-i18n="abUpiVerify">Verify &amp; Save</button>
+    </div>
+  </div>
+
+  <!-- Visa Direct — blocked card series -->
+  <div class="ab-sheet ui-sheet" id="abVisaBlockSheet" hidden aria-hidden="true">
+    <div class="ab-sheet__backdrop ui-sheet__backdrop" data-ab-visa-block-close></div>
+    <div class="ab-sheet__panel ui-sheet__panel ab-visa-block__panel" role="dialog" aria-modal="true" aria-labelledby="abVisaBlockTitle">
+      <header class="ab-upi-sheet__head">
+        <h2 class="ab-upi-sheet__title" id="abVisaBlockTitle" data-i18n="abVisaBlockTitle">Visa Direct</h2>
+        <button class="ab-upi-sheet__close" type="button" data-ab-visa-block-close aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </header>
+      <p class="ab-visa-block__copy" data-i18n="abVisaBlockBody">Remittance to this Visa Card series is not allowed. Our Partner is working with the Card Issuer to fix the issue at the earliest. We regret for the inconvenience</p>
+      <div class="ab-visa-block__actions">
+        <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abVisaBlockOk" data-i18n="ok">OK</button>
+        <button class="ab-btn ab-btn--outline ab-btn--block" type="button" id="abVisaBlockCallback" data-i18n="abVisaBlockCallback">Request a Call Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms modal (optional) -->
+  <div class="ab-modal" id="abTerms" hidden aria-hidden="true">
+    <div class="ab-modal__backdrop" data-ab-close="terms"></div>
+    <div class="ab-modal__panel" role="dialog" aria-modal="true" aria-labelledby="abTermsTitle">
+      <header class="modal-head">
+        <h2 class="modal-head__title" id="abTermsTitle" data-i18n="abTermsTitle">Terms &amp; Conditions</h2>
+        <button class="modal-head__close" type="button" data-ab-close="terms" aria-label="Close">
+          <img src="assets/images/close.svg" width="24" height="24" alt="" />
+        </button>
+      </header>
+      <div class="ab-modal__body">
+        <p data-i18n="abTermsIntro">Customers wishing to settle payments to Al Mulla International Exchange Company (hereinafter referred to as the "Company") via the Knet online payment gateway are kindly requested to carefully read these Terms and Conditions before completing the payment process.</p>
+        <h3 data-i18n="abTerms1Title">1. Use of Payment Method</h3>
+        <p data-i18n="abTerms1Body">Payment shall be made through the Knet online payment gateway using a Knet card only.</p>
+        <h3 data-i18n="abTerms2Title">2. Acceptance and Commitment</h3>
+        <p data-i18n="abTerms2Body">The customer explicitly confirms that they have read and accepted these Terms and Conditions, and renews their acceptance of them each time the service is used, in addition to any supplementary terms or conditions that may be issued by the Company from time to time.</p>
+        <p data-i18n="abTermsClose">By using the online payment service, you agree to comply with all the Terms and Conditions stated herein, and your agreement shall be considered as an acknowledgment from you.</p>
+      </div>
+      <button class="ab-btn ab-btn--primary ab-btn--block" type="button" id="abTermsOk" data-i18n="ok">OK</button>
+    </div>
+  </div>
+
+  <!-- Bank / branch picker — matches bottom sheet width -->
+  <div class="ab-picker" id="abPicker" hidden aria-hidden="true">
+    <div class="ab-picker__backdrop" data-ab-picker-close></div>
+    <div class="ab-picker__panel" role="dialog" aria-modal="true" aria-labelledby="abPickerTitle">
+      <header class="ab-picker__head">
+        <h2 class="ab-picker__title" id="abPickerTitle">Select</h2>
+        <button class="ab-picker__close" type="button" data-ab-picker-close aria-label="Close">×</button>
+      </header>
+      <div class="ab-picker__search" id="abPickerSearchWrap" hidden>
+        <span class="ab-picker__search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16.2 16.2 3.3 3.3"/></svg>
+        </span>
+        <input class="ab-picker__search-input" id="abPickerSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Search..." aria-label="Search" />
+      </div>
+      <div class="ab-picker__list" id="abPickerList" role="listbox"></div>
+    </div>
+  </div>
+
+  <button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/pages/add-beneficiary.js?v=79"></script>
+</body>
+</html>

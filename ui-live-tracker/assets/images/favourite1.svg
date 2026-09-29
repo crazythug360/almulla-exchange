@@ -1,0 +1,17 @@
+<svg width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="14.645%" y1="14.645%" x2="85.355%" y2="85.355%" id="rtvii4mfaa">
+            <stop stop-color="#FFDA17" offset="0%"/>
+            <stop stop-color="#F0B507" offset="100%"/>
+        </linearGradient>
+        <linearGradient x1="16.321%" y1="20.88%" x2="70.969%" y2="83.677%" id="4eew5gr3xb">
+            <stop stop-color="#BF9006" offset="0%"/>
+            <stop stop-color="#BF9006" stop-opacity="0" offset="93%"/>
+        </linearGradient>
+    </defs>
+    <g fill-rule="nonzero" fill="none">
+        <circle fill="url(#rtvii4mfaa)" cx="8.5" cy="8.5" r="8.5"/>
+        <path d="M16.608 11.03c-.947 3.01-3.51 5.298-6.668 5.84l-4.186-4.204 3.221-8.22 2.97 2.982.987-.088 3.676 3.69z" fill="url(#4eew5gr3xb)"/>
+        <path d="m8.915 4.483.98 1.986a.535.535 0 0 0 .401.292l2.194.318a.535.535 0 0 1 .295.911L11.2 9.536a.534.534 0 0 0-.154.473l.375 2.182a.534.534 0 0 1-.776.563l-1.961-1.03a.535.535 0 0 0-.498 0l-1.96 1.03a.535.535 0 0 1-.776-.563l.374-2.183a.534.534 0 0 0-.153-.472L4.084 7.991a.534.534 0 0 1 .296-.911l2.193-.318a.535.535 0 0 0 .401-.293l.98-1.986a.535.535 0 0 1 .96 0z" fill="#FFF"/>
+    </g>
+</svg>

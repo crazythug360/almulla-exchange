@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    try {
+      var l = localStorage.getItem("ame-lang");
+      document.documentElement.setAttribute("lang", l === "ar" ? "ar" : "en");
+      document.documentElement.setAttribute("dir", l === "ar" ? "rtl" : "ltr");
+    } catch (e) {
+      document.documentElement.setAttribute("dir", "ltr");
+    }
+  </script>
+  <title>Al Mulla Exchange — Select Beneficiary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@700&family=Noto+Sans+Bengali:wght@700&family=Noto+Sans+Devanagari:wght@700&family=Noto+Sans+Gujarati:wght@700&family=Noto+Sans+Malayalam:wght@700&family=Noto+Sans+Telugu:wght@700&display=swap" rel="stylesheet" />
+  <script src="js/display-scale.js?v=1"></script>
+  <link rel="stylesheet" href="css/tokens.css?v=ds19" />
+  <link rel="stylesheet" href="css/style.css?v=fit180" />
+  <link rel="stylesheet" href="css/pages/dashboard.css?v=fit26" />
+  <link rel="stylesheet" href="css/pages/beneficiaries.css?v=43" />
+  <script>
+    try { if (sessionStorage.getItem("amePageEnter")) document.documentElement.classList.add("is-entering"); } catch (e) {}
+  </script>
+</head>
+<body class="page-dashboard page-send page-beneficiaries">
+
+  <div class="preloader" id="preloader" role="status" aria-live="polite" aria-busy="true" aria-label="Loading">
+    <div class="preloader__inner">
+      <img class="preloader__logo" src="assets/images/brand/logo-almulla-exchange.svg" alt="Al Mulla Exchange" />
+      <span class="preloader__spinner" aria-hidden="true"></span>
+      <span class="preloader__track" aria-hidden="true"><span class="preloader__bar"></span></span>
+    </div>
+  </div>
+
+  <div id="ameTopnav"></div>
+  </div>
+<div class="app" id="app">
+    <main class="content content--home bene-page">
+      <div class="bene-panel">
+        <div class="bene-sticky">
+          <div class="bene-head">
+            <div class="bene-head__bar">
+              <div class="bene-head__lead">
+                <a class="page-back" href="send.html" data-i18n-aria="back" aria-label="Back">
+                  <video class="page-back__video" src="assets/images/back_arrow.webm" width="32" height="32" muted loop autoplay playsinline preload="auto" aria-hidden="true"></video>
+                </a>
+                <h1 class="bene-title" data-i18n="selectBeneficiary">Select Beneficiary</h1>
+              </div>
+              <button class="send-add send-add--primary" type="button" id="beneAddBtn">
+                <img class="send-add__icon" src="assets/images/add_bene.svg" width="14" height="22" alt="" aria-hidden="true" />
+                <span data-i18n="addBeneficiary">Add Beneficiary</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="bene-tools">
+            <label class="bene-search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <span class="bene-search__slot">
+                <input type="search" id="beneListSearch" data-i18n-aria="searchNameBankAccount" aria-label="Search by name, bank or account number" placeholder="" autocomplete="off" />
+                <span class="bene-search-hint" id="beneSearchHint" aria-hidden="true">
+                  <span class="bene-search-hint__fixed">Search by</span>
+                  <span class="bene-search-hint__text"></span>
+                  <span class="bene-search-hint__caret"></span>
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="bene-toolbar">
+            <div class="bene-chips" id="beneChips" role="tablist" aria-label="Currency filter">
+              <button class="bene-chip is-on" type="button" role="tab" aria-selected="true" data-bene-ccy="all">
+                <span>All</span>
+              </button>
+              <button class="bene-chip" type="button" role="tab" aria-selected="false" data-bene-ccy="BDT">
+                <span>BDT</span>
+              </button>
+              <button class="bene-chip" type="button" role="tab" aria-selected="false" data-bene-ccy="USD">
+                <span>USD</span>
+              </button>
+              <button class="bene-chip" type="button" role="tab" aria-selected="false" data-bene-ccy="PHP">
+                <span>PHP</span>
+              </button>
+              <button class="bene-chip" type="button" role="tab" aria-selected="false" data-bene-ccy="INR">
+                <span>INR</span>
+              </button>
+            </div>
+            <div class="bene-filter-wrap">
+              <button class="bene-filter-btn" id="beneFilterBtn" type="button" aria-expanded="false" aria-controls="beneFilterSheet" aria-haspopup="listbox">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 7h16M7 12h10M10 17h4" stroke-linecap="round"/><circle cx="9" cy="7" r="1.6" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.6" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.6" fill="currentColor" stroke="none"/></svg>
+                <span data-i18n="filter">Filter</span>
+              </button>
+              <div class="bene-filter-drop" id="beneFilterSheet" hidden aria-hidden="true">
+                <ul class="bene-filter-opts" role="listbox" aria-label="Filter Beneficiary">
+                  <li>
+                    <button class="bene-filter-opt" type="button" role="option" data-bene-status="active" aria-selected="false">
+                      <span class="bene-filter-opt__icon" aria-hidden="true"><img src="assets/images/active.svg" alt="" width="28" height="28" /></span>
+                      <span data-i18n="active">Active</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="bene-filter-opt" type="button" role="option" data-bene-status="all" aria-selected="true">
+                      <span class="bene-filter-opt__icon" aria-hidden="true"><img src="assets/images/all.svg" alt="" width="28" height="28" /></span>
+                      <span data-i18n="all">All</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="bene-filter-opt" type="button" role="option" data-bene-status="favourite" aria-selected="false">
+                      <span class="bene-filter-opt__icon" aria-hidden="true"><img src="assets/images/favourite.svg" alt="" width="28" height="28" /></span>
+                      <span data-i18n="favourite">Favourite</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="bene-filter-opt" type="button" role="option" data-bene-status="disabled" aria-selected="false">
+                      <span class="bene-filter-opt__icon" aria-hidden="true"><img src="assets/images/disabled.svg" alt="" width="28" height="28" /></span>
+                      <span data-i18n="disabled">Disabled</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button class="bene-filter-opt" type="button" role="option" data-bene-status="inactive" aria-selected="false">
+                      <span class="bene-filter-opt__icon" aria-hidden="true"><img src="assets/images/inactive.svg" alt="" width="28" height="28" /></span>
+                      <span data-i18n="inactive">Inactive</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="bene-views" role="group" aria-label="View mode">
+              <button class="bene-view" id="beneViewGrid" type="button" data-bene-view="grid" aria-pressed="false" data-i18n-aria="viewGrid" aria-label="Grid view">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="3" width="8" height="8" rx="2"/>
+                  <rect x="13" y="3" width="8" height="8" rx="2"/>
+                  <rect x="3" y="13" width="8" height="8" rx="2"/>
+                  <rect x="13" y="13" width="8" height="8" rx="2"/>
+                </svg>
+              </button>
+              <button class="bene-view is-on" id="beneViewList" type="button" data-bene-view="list" aria-pressed="true" data-i18n-aria="viewList" aria-label="List view">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <rect x="3" y="4" width="4" height="4" rx="1.2"/>
+                  <rect x="9" y="4.5" width="12" height="3" rx="1.5"/>
+                  <rect x="3" y="10" width="4" height="4" rx="1.2"/>
+                  <rect x="9" y="10.5" width="12" height="3" rx="1.5"/>
+                  <rect x="3" y="16" width="4" height="4" rx="1.2"/>
+                  <rect x="9" y="16.5" width="12" height="3" rx="1.5"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ul class="bene-list is-list" id="beneList"></ul>
+      </div>
+    </main>
+  </div>
+
+  <div class="bene-detail-sheet" id="beneDetailSheet" hidden aria-hidden="true">
+    <div class="bene-detail-sheet__backdrop" data-bene-detail-close></div>
+    <aside class="bene-detail-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="beneDetailTitle">
+      <header class="bene-detail-sheet__head">
+        <h2 class="bene-detail-sheet__title" id="beneDetailTitle" data-i18n="beneficiaryDetails">Beneficiary Details</h2>
+        <button class="bene-detail-sheet__close" type="button" data-bene-detail-close data-i18n-aria="close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </header>
+
+      <dl class="bene-detail-sheet__list">
+        <div class="bene-detail-sheet__row">
+          <dt data-i18n="beneNameLabel">Bene Name</dt>
+          <dd id="beneDetailName">—</dd>
+        </div>
+        <div class="bene-detail-sheet__row">
+          <dt data-i18n="branches">Branches</dt>
+          <dd id="beneDetailBranch">—</dd>
+        </div>
+        <div class="bene-detail-sheet__row">
+          <dt data-i18n="relationship">Relationship</dt>
+          <dd id="beneDetailRelation">—</dd>
+        </div>
+        <div class="bene-detail-sheet__row">
+          <dt data-i18n="beneBankLabel">Bene Bank</dt>
+          <dd id="beneDetailBank">—</dd>
+        </div>
+        <div class="bene-detail-sheet__row">
+          <dt data-i18n="service">Service</dt>
+          <dd id="beneDetailService">—</dd>
+        </div>
+      </dl>
+
+      <div class="bene-detail-sheet__actions">
+        <button class="bene-detail-sheet__action" type="button" id="beneDetailFav">
+          <span class="bene-detail-sheet__action-icon bene-detail-sheet__action-icon--muted" aria-hidden="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.4c.35 0 .67.2.82.52l1.96 4.28 4.66.5c.78.08 1.1 1.04.51 1.56l-3.5 3.2.98 4.56c.16.76-.65 1.35-1.32.96L12 16.9l-4.11 2.08c-.67.39-1.48-.2-1.32-.96l.98-4.56-3.5-3.2c-.59-.52-.27-1.48.51-1.56l4.66-.5 1.96-4.28c.15-.32.47-.52.82-.52Z"/></svg>
+          </span>
+          <span data-i18n="favourite">Favourite</span>
+        </button>
+        <button class="bene-detail-sheet__action" type="button" id="beneDetailSend">
+          <span class="bene-detail-sheet__action-icon bene-detail-sheet__action-icon--primary" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7.2"/><path d="M9.2 12h5.6M12 9.2v5.6"/><path d="M5.2 10.2h2.2M5.2 13.8h2.2M16.6 10.2h2.2M16.6 13.8h2.2"/></svg>
+          </span>
+          <span data-i18n="sendMoney">Send Money</span>
+        </button>
+        <div class="bene-detail-sheet__action bene-detail-sheet__action--static">
+          <button class="switch is-on" type="button" id="beneDetailActive" role="switch" aria-checked="true" data-i18n-aria="active" aria-label="Active"></button>
+          <span data-i18n="active">Active</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="notify-backdrop" id="notifyBackdrop"></div>
+  <aside class="notify-drawer" id="notifyDrawer" aria-hidden="true">
+    <div class="notify-drawer__head">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button class="notify-drawer__close" id="notifyClose" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7l10 10M17 7 7 17"/></svg>
+      </button>
+    </div>
+    <ul class="news-list">
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong>Maintenance Update</strong>
+          <p>Our services will be unavailable on May 30th from 1:00 AM to 3:00 AM.</p>
+          <small>May 24, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong>New Branch Opening</strong>
+          <p>We’re opening a new branch in Salmiya on June 15th</p>
+          <small>May 22, 2025</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyTransfer">Your transfer to India was completed.</strong>
+          <small>Today</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon blue">📍</span>
+        <div>
+          <strong data-i18n="notifyRate">INR rate improved on your saved corridor.</strong>
+          <small>Yesterday</small>
+        </div>
+      </li>
+      <li>
+        <span class="news-icon amber">✦</span>
+        <div>
+          <strong data-i18n="notifyReward">Prestige reward points were credited.</strong>
+          <small>May 20, 2025</small>
+        </div>
+      </li>
+    </ul>
+  </aside>
+
+<button class="support" id="supportBtn" type="button" data-i18n-aria="support" aria-label="support">
+    <img class="support__icon" src="assets/images/helpicon_support1.svg" width="40" height="38" alt="">
+  </button>
+
+<div class="overlay" id="overlay" hidden></div>
+
+  <div id="ameDrawer"></div>
+
+<dialog class="modal" id="branchesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="branchesTitle">Our branches</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="list">
+      <li>Salmiya — Amman Street</li>
+      <li>Kuwait City — Fahad Al Salem</li>
+      <li>Hawally — Beirut Street</li>
+      <li>Fahaheel — Ajial Complex</li>
+      <li>Jahra — Block 3</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="ratesModal">
+    <div class="modal__bar">
+      <h2 data-i18n="ratesTitle">Exchange rates</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <table class="rates">
+      <thead>
+        <tr><th></th><th data-i18n="currency">Currency</th><th data-i18n="oneKwd">1 KWD</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/us.png" width="22" height="16" alt="" /></td><td>USD</td><td>3.2570</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eu.png" width="22" height="16" alt="" /></td><td>EUR</td><td>3.0124</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/gb.png" width="22" height="16" alt="" /></td><td>GBP</td><td>2.5481</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/in.png" width="22" height="16" alt="" /></td><td>INR</td><td>271.85</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/pk.png" width="22" height="16" alt="" /></td><td>PKR</td><td>907.40</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/bd.png" width="22" height="16" alt="" /></td><td>BDT</td><td>396.12</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ph.png" width="22" height="16" alt="" /></td><td>PHP</td><td>186.55</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/eg.png" width="22" height="16" alt="" /></td><td>EGP</td><td>157.80</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/sa.png" width="22" height="16" alt="" /></td><td>SAR</td><td>12.215</td></tr>
+        <tr><td><img class="ticker__flag" src="https://flagcdn.com/w40/ae.png" width="22" height="16" alt="" /></td><td>AED</td><td>11.968</td></tr>
+      </tbody>
+    </table>
+    <p class="fine" data-i18n="ratesNote">Indicative rates. 1 KWD to each currency. Final rate confirmed at transaction.</p>
+  </dialog>
+
+  <dialog class="modal" id="supportModal">
+    <div class="modal__bar">
+      <h2 data-i18n="supportTitle">Talk to support</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="supportBody">Our team is available 24/7 for transfers, rates, and account help.</p>
+    <p><strong>+965 1820 000</strong></p>
+    <p>support@almullaexchange.com</p>
+  </dialog>
+
+  <dialog class="modal" id="notifyModal">
+    <div class="modal__bar">
+      <h2 data-i18n="notifications">Notifications</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <ul class="dash-notes">
+      <li data-i18n="notifyTransfer">Your transfer to India was completed.</li>
+      <li data-i18n="notifyRate">INR rate improved on your saved corridor.</li>
+      <li data-i18n="notifyReward">Prestige reward points were credited.</li>
+    </ul>
+  </dialog>
+
+  <dialog class="modal" id="demoModal">
+    <div class="modal__bar">
+      <h2 data-i18n="demo">Demo</h2>
+      <button type="button" class="icon-btn" data-close aria-label="Close">×</button>
+    </div>
+    <p data-i18n="demoBody">Watch a short walkthrough of login, rates, and sending money with Al Mulla Exchange.</p>
+  </dialog>
+
+    <script src="js/topnav.js?v=43"></script>
+  <script src="js/drawer.js?v=ex4"></script>
+  <script src="js/app.js?v=77"></script>
+  <script src="js/data/send-data.js?v=4"></script>
+  <script src="js/pages/beneficiaries.js?v=19"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+/* Prestige services on the same dashboard chrome. Gold is accent only. */
+
+.page-prestige {
+  --prestige-gold: #c4a06a;
+  --prestige-gold-deep: #8b5e34;
+  --prestige-gold-line: #e4c49a;
+}
+
+.page-prestige .prestige-services {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-paper);
+}
+
+.page-prestige .prestige-banner {
+  position: relative;
+  z-index: 0;
+  margin: 0 -22px 16px;
+  padding: 0;
+  aspect-ratio: 1942 / 240;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #04371B;
+}
+
+.page-prestige .prestige-banner > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.page-prestige .prestige-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.page-prestige .prestige-benefits li {
+  min-width: 0;
+}
+
+.page-prestige .prestige-services__foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 24px 0 12px;
+  text-align: center;
+}
+
+.page-prestige .prestige-services__dash {
+  box-sizing: border-box;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 0;
+  gap: 0;
+  margin-inline: auto;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font-family: var(--ff-sans);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.page-prestige .prestige-services__dash svg,
+.page-prestige .prestige-services__dash .page-back__video {
+  width: var(--icon-xl);
+  height: var(--icon-xl);
+  flex-shrink: 0;
+}
+
+.page-prestige .prestige-services__dash:hover {
+  background: transparent;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.page-prestige .prestige-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 176px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  font: inherit;
+  background: var(--color-paper);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--fc-heading);
+  transform: translateY(0);
+  transition:
+    transform 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    box-shadow 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    border-color 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1)),
+    background 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.page-prestige .prestige-card__icon {
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.22s var(--ease, cubic-bezier(0.22, 1, 0.36, 1));
+}
+
+.page-prestige .prestige-card__icon img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (hover: hover) {
+  .page-prestige .prestige-card:hover {
+    transform: translateY(-6px);
+    background: #ffffff;
+    border-color: var(--color-secondary);
+    box-shadow:
+      0 12px 28px rgba(var(--color-secondary-rgb), 0.18),
+      0 2px 0 var(--color-primary);
+  }
+
+  .page-prestige .prestige-card:hover .prestige-card__icon {
+    transform: scale(1.1);
+  }
+
+  .page-prestige .prestige-card--gold:hover {
+    border-color: var(--prestige-gold);
+    box-shadow:
+      0 12px 28px rgba(196, 160, 106, 0.28),
+      0 2px 0 var(--prestige-gold);
+  }
+}
+
+.page-prestige .prestige-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-prestige .prestige-card,
+  .page-prestige .prestige-card__icon {
+    transition: none;
+  }
+
+  .page-prestige .prestige-card:hover {
+    transform: none;
+  }
+}
+
+.page-prestige .prestige-card--gold {
+  background: var(--color-paper);
+  border-color: var(--prestige-gold-line);
+}
+
+.page-prestige .prestige-card--gold .prestige-card__label {
+  color: var(--prestige-gold-deep);
+}
+
+.page-prestige .prestige-card--green {
+  border-color: var(--color-hairline);
+}
+
+.page-prestige .prestige-card--green .prestige-card__label {
+  color: #066D35;
+}
+
+.page-prestige .prestige-card--gold .prestige-card__icon,
+.page-prestige .prestige-card--gold .prestige-card__icon img {
+  width: 104px;
+  height: 104px;
+}
+
+.page-prestige .prestige-card__label {
+  font-size: var(--fs-desc);
+  font-weight: var(--fw-semibold);
+  line-height: 1.3;
+}
+
+.page-prestige .drawer__item[data-menu="prestige"] {
+  color: var(--color-secondary);
+}
+
+@media (max-width: 1180px) {
+  .page-prestige .prestige-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .page-prestige .prestige-banner {
+    margin: 0 -12px 14px;
+  }
+
+  .page-prestige .prestige-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .page-prestige .prestige-card {
+    min-height: 0;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: start;
+    padding: 12px 16px;
+    gap: 14px;
+  }
+
+  .page-prestige .prestige-card__icon,
+  .page-prestige .prestige-card__icon img,
+  .page-prestige .prestige-card--gold .prestige-card__icon,
+  .page-prestige .prestige-card--gold .prestige-card__icon img {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media ((max-width: 1512px) or (max-height: 960px)) and (min-width: 701px) {
+  .page-prestige .prestige-banner {
+    margin: 0 -16px 14px;
+  }
+
+  .page-prestige .prestige-card {
+    min-height: 156px;
+  }
+
+  .page-prestige .prestige-card__icon,
+  .page-prestige .prestige-card__icon img {
+    width: 88px;
+    height: 88px;
+  }
+
+  .page-prestige .prestige-card--gold .prestige-card__icon,
+  .page-prestige .prestige-card--gold .prestige-card__icon img {
+    width: 96px;
+    height: 96px;
+  }
+}
